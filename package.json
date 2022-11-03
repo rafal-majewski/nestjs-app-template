@@ -1,0 +1,43 @@
+{
+	"name": "nodejs-app-template",
+	"version": "0.0.0",
+	"description": "Node.js app template",
+	"main": "./src/main.ts",
+	"scripts": {
+		"start": "NODE_ENV=production node ./dist/src/main.js",
+		"build": "tsc",
+		"preview": "NODE_ENV=development node ./dist/src/main.js",
+		"dev": "ts-node ./src/main.ts",
+		"jest-check": "jest --passWithNoTests --coverage",
+		"prettier-fix": "prettier --write .",
+		"prettier-check": "prettier --check .",
+		"eslint-fix": "eslint --fix .",
+		"eslint-check": "eslint --max-warnings 0 .",
+		"typescript-check": "tsc --noEmit",
+		"npm-audit-check": "npm audit --audit-level=low",
+		"npm-audit-fix": "npm audit fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Rafal-Majewski/nodejs-app-template.git"
+	},
+	"author": "Rafał Majewski",
+	"license": "CC0-1.0",
+	"bugs": {
+		"url": "https://github.com/Rafal-Majewski/nodejs-app-template/issues"
+	},
+	"homepage": "https://github.com/Rafal-Majewski/nodejs-app-template#readme",
+	"devDependencies": {
+		"@types/jest": "^29.2.3",
+		"@types/node": "^18.11.9",
+		"@typescript-eslint/eslint-plugin": "^5.42.0",
+		"@typescript-eslint/parser": "^5.42.0",
+		"eslint": "^8.26.0",
+		"eslint-config-prettier": "^8.5.0",
+		"jest": "^29.3.1",
+		"prettier": "^2.7.1",
+		"ts-jest": "^29.0.3",
+		"ts-node": "^10.9.1",
+		"typescript": "^4.8.4"
+	}
+}
