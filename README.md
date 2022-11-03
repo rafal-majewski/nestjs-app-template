@@ -1,6 +1,6 @@
-# nodejs-app-template
+# nestjs-app-template
 
-This is a template for a Node.js TypeScript project.
+This is a template for a Nest.js TypeScript project.
 
 The following following tools have been configured:
 
