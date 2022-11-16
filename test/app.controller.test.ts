@@ -1,6 +1,5 @@
 import {Test, TestingModule} from "@nestjs/testing";
-import AppController from "../src/app.controller";
-import AppService from "../src/app.service";
+import {AppController, AppService} from "../src/app";
 import {describe, test, expect, beforeEach} from "@jest/globals";
 import {AppConfig} from "../src/app-config";
 
