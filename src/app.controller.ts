@@ -12,6 +12,10 @@ class AppController {
 	public getHello(): string {
 		return this.appService.getHello();
 	}
+	@Get("custom-hello")
+	public getCustomHello(): string {
+		return this.appService.getCustomHello();
+	}
 }
 
 export default AppController;
