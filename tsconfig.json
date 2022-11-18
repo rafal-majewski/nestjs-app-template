@@ -30,7 +30,7 @@
 		"emitDeclarationOnly": false,
 		"importHelpers": true,
 		"importsNotUsedAsValues": "remove",
-		"inlineSourceMap": false,
+		"inlineSourceMap": true,
 		"inlineSources": false,
 		"newLine": "lf",
 		"noEmitHelpers": false,
