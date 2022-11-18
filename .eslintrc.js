@@ -26,8 +26,13 @@ module.exports = {
 				sourceType: "module",
 				ecmaVersion: 13,
 			},
-			extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
-			plugins: ["@typescript-eslint"],
+			extends: [
+				"eslint:recommended",
+				"plugin:@typescript-eslint/recommended",
+				"plugin:jest/recommended",
+				"prettier",
+			],
+			plugins: ["@typescript-eslint", "jest"],
 			rules: {
 				"no-empty-function": "off",
 				"@typescript-eslint/no-empty-function": "off",
@@ -52,8 +57,8 @@ module.exports = {
 				ecmaVersion: 13,
 				sourceType: "module",
 			},
-			extends: ["eslint:recommended", "prettier"],
-			plugins: [],
+			extends: ["eslint:recommended", "plugin:jest/recommended", "prettier"],
+			plugins: ["jest"],
 			rules: {
 				"no-empty-function": "off",
 			},
