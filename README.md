@@ -31,17 +31,17 @@ npm run dev
 
 Note: The project uses [ts-node](https://www.npmjs.com/package/ts-node) to run TypeScript code on the fly.
 
-### Build the application
+### Compile the application
 
 ```bash
-npm run build
+npm run compile
 ```
 
 This will create a `dist` directory with the compiled code.
 
 Note: The `dist` directory will mimic the main directory structure. All directories with TypeScript files will be recreated in the `dist` directory. In the default configuration those are `src` and `test`.
 
-### Run the built application
+### Run the compiled application
 
 To run with `NODE_ENV=development`:
 
@@ -55,7 +55,7 @@ To run with `NODE_ENV=production`:
 npm run start
 ```
 
-Note: This will command will fail if the application has not been built (no `dist` directory)!
+Note: This will command will fail if the application has not been compiled (no `dist` directory)!
 
 ### Test the application
 
@@ -134,12 +134,12 @@ Check if the code compiles:
 npm run typescript-check
 ```
 
-### Building the application
+### Compiling the application
 
 This job requires all the previous formatting-unrelated jobs to pass.
 
 ```bash
-npm run build
+npm run compile
 ```
 
-You can later download the built application from the "Artifacts" tab of the GitHub Actions workflow.
+You can later download the compiled application as an artifact named `dist`.
