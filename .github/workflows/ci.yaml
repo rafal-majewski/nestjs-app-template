@@ -44,8 +44,8 @@ jobs:
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
-          name: coverage
-          path: coverage
+          name: coverage_report
+          path: coverage_report
   npm-audit-check:
     name: npm audit check
     runs-on: ubuntu-latest
