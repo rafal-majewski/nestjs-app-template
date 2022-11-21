@@ -16,6 +16,10 @@ module.exports = {
 				"no-empty-function": "off",
 				"@typescript-eslint/no-empty-function": "off",
 			},
+			env: {
+				es2022: true,
+				node: true,
+			},
 		},
 		{
 			files: ["*.test.ts"],
@@ -37,9 +41,13 @@ module.exports = {
 				"no-empty-function": "off",
 				"@typescript-eslint/no-empty-function": "off",
 			},
+			env: {
+				es2022: true,
+				node: true,
+			},
 		},
 		{
-			files: ["*.js"],
+			files: ["*.js", "*.cjs", "*.mjs"],
 			parser: "espree",
 			parserOptions: {
 				ecmaVersion: 13,
@@ -49,9 +57,13 @@ module.exports = {
 			rules: {
 				"no-empty-function": "off",
 			},
+			env: {
+				es2022: true,
+				node: true,
+			},
 		},
 		{
-			files: ["*.test.js"],
+			files: ["*.test.js", "*.test.cjs", "*.test.mjs"],
 			parser: "espree",
 			parserOptions: {
 				ecmaVersion: 13,
@@ -62,11 +74,10 @@ module.exports = {
 			rules: {
 				"no-empty-function": "off",
 			},
+			env: {
+				es2022: true,
+				node: true,
+			},
 		},
 	],
-	settings: {},
-	env: {
-		es2022: true,
-		node: true,
-	},
 };
