@@ -118,6 +118,8 @@ npm run prettier-check
 npm run jest-check
 ```
 
+You can later download the coverage report as an artifact named `coverage`.
+
 ### npm audit check
 
 ```bash
