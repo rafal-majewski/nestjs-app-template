@@ -50,8 +50,21 @@ jobs:
       - name: Run npm audit
         run: |
           npm run npm-audit-check
+  typescript-check:
+    name: TypeScript check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Run TypeScript
+        run: |
+          npm run typescript-check
   build:
     name: Build
+    needs: [eslint-check, jest-check, npm-audit-check, typescript-check]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

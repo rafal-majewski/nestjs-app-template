@@ -124,7 +124,17 @@ npm run jest-check
 npm run npm-audit-check
 ```
 
+### TypeScript check
+
+Check if the code compiles:
+
+```bash
+npm run typescript-check
+```
+
 ### Building the application
+
+This job requires all the previous formatting-unrelated jobs to pass.
 
 ```bash
 npm run build
