@@ -69,7 +69,7 @@ jobs:
           npm run typescript-check
   compile:
     name: Compile
-    needs: [eslint-check, jest-check, npm-audit-check, typescript-check]
+    needs: [eslint-check, jest-check, typescript-check]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
