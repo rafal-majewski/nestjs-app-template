@@ -43,8 +43,6 @@ Note: The `dist` directory will mimic the main directory structure. All director
 
 ### Run the compiled application
 
-To run with `NODE_ENV=development`:
-
 ```bash
 npm run preview
 ```
