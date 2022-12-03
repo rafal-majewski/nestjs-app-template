@@ -63,7 +63,7 @@ Tests can be found in the `test` directory.
 [Jest](https://www.npmjs.com/package/jest) is used to run and write the tests.
 
 ```bash
-npm run jest-check
+npm run jest:check
 ```
 
 This will run the tests and also providing a tabular code coverage report.
@@ -72,7 +72,7 @@ An HTML code coverage report will be also generated in the `coverage_report` dir
 ### Run the linter
 
 ```bash
-npm run eslint-check
+npm run eslint:check
 ```
 
 Note: The linter will return a non-zero exit code if there are any linting errors or warnings.
@@ -80,19 +80,19 @@ Note: The linter will return a non-zero exit code if there are any linting error
 You can also try to automatically fix some of the errors and warnings by running:
 
 ```bash
-npm run eslint-fix
+npm run eslint:fix
 ```
 
 ### Run the formatter
 
 ```bash
-npm run prettier-check
+npm run prettier:check
 ```
 
 Formatting errors can be automatically fixed by running:
 
 ```bash
-npm run prettier-fix
+npm run prettier:fix
 ```
 
 ## CI Pipeline
@@ -103,19 +103,19 @@ It consists of the following (run in parallel) jobs:
 ### ESLint check
 
 ```bash
-npm run eslint-check
+npm run eslint:check
 ```
 
 ### Prettier check
 
 ```bash
-npm run prettier-check
+npm run prettier:check
 ```
 
 ### Jest check
 
 ```bash
-npm run jest-check
+npm run jest:check
 ```
 
 You can later download the coverage report as an artifact named `coverage_report`.
@@ -123,7 +123,7 @@ You can later download the coverage report as an artifact named `coverage_report
 ### npm audit check
 
 ```bash
-npm run npm-audit-check
+npm run npm-audit:check
 ```
 
 ### TypeScript check
@@ -131,7 +131,7 @@ npm run npm-audit-check
 Check if the code compiles:
 
 ```bash
-npm run typescript-check
+npm run typescript:check
 ```
 
 ### Compiling the application

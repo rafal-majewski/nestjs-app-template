@@ -16,7 +16,7 @@ jobs:
           npm ci
       - name: Run prettier
         run: |
-          npm run prettier-check
+          npm run prettier:check
   eslint-check:
     name: ESLint check
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
           npm ci
       - name: Run eslint
         run: |
-          npm run eslint-check
+          npm run eslint:check
   jest-check:
     name: Jest check
     runs-on: ubuntu-latest
@@ -40,7 +40,7 @@ jobs:
           npm ci
       - name: Run Jest
         run: |
-          npm run jest-check
+          npm run jest:check
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Run npm audit
         run: |
-          npm run npm-audit-check
+          npm run npm-audit:check
   typescript-check:
     name: TypeScript check
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
           npm ci
       - name: Run TypeScript
         run: |
-          npm run typescript-check
+          npm run typescript:check
   compile:
     name: Compile
     needs: [eslint-check, jest-check, typescript-check]
