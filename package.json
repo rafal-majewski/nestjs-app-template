@@ -16,8 +16,8 @@
 		"typescript-check": "tsc --noEmit",
 		"npm-audit-check": "npm audit --audit-level=low",
 		"npm-audit-fix": "npm audit fix",
-		"formatting-fix": "npm run prettier-fix",
-		"formatting-check": "npm run prettier-check"
+		"formatting-fix": "prettier --write .",
+		"formatting-check": "prettier --check ."
 	},
 	"repository": {
 		"type": "git",
