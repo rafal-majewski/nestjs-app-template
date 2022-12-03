@@ -57,7 +57,7 @@ Note: This will command will fail if the application has not been compiled (no `
 
 ### Test the application
 
-Tests can be found in the `test` directory.
+The tests can be found in the `test` directory.
 [Jest](https://www.npmjs.com/package/jest) is used to run and write the tests.
 
 ```bash
