@@ -1,5 +1,5 @@
 import {NestFactory} from "@nestjs/core";
-import {HelloModule} from "./hello/index.js";
+import {HelloModule} from "./features/hello/index.js";
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
 import {AppConfig} from "./app-config/index.js";
 import {VersioningType} from "@nestjs/common";
