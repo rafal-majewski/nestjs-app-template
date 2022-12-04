@@ -23,31 +23,32 @@ describe("HelloModule", () => {
 		await app.init();
 		await app.getHttpAdapter().getInstance().ready();
 	});
-
-	test("GET /v2/custom-hello", async () => {
-		const response = await app.inject({
-			method: "GET",
-			url: "/v2/custom-hello",
+	describe("v1", () => {
+		test("GET /", async () => {
+			const response = await app.inject({
+				method: "GET",
+				url: "/v1",
+			});
+			expect(response.statusCode).toBe(200);
+			expect(response.payload).toBe("Hello werelld!");
 		});
-		expect(response.statusCode).toBe(200);
-		expect(response.payload).toBe("Hello mocked world!");
 	});
-
-	test("GET /v1", async () => {
-		const response = await app.inject({
-			method: "GET",
-			url: "/v1",
+	describe("v2", () => {
+		test("GET /custom-hello", async () => {
+			const response = await app.inject({
+				method: "GET",
+				url: "/v2/custom-hello",
+			});
+			expect(response.statusCode).toBe(200);
+			expect(response.payload).toBe("Hello mocked world!");
 		});
-		expect(response.statusCode).toBe(200);
-		expect(response.payload).toBe("Hello werelld!");
-	});
-
-	test("GET /v2", async () => {
-		const response = await app.inject({
-			method: "GET",
-			url: "/v2",
+		test("GET /", async () => {
+			const response = await app.inject({
+				method: "GET",
+				url: "/v2",
+			});
+			expect(response.statusCode).toBe(200);
+			expect(response.payload).toBe("Hello world!");
 		});
-		expect(response.statusCode).toBe(200);
-		expect(response.payload).toBe("Hello world!");
 	});
 });
