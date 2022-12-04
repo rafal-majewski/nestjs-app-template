@@ -2,7 +2,7 @@ import {Injectable} from "@nestjs/common";
 import {AppConfig} from "../app-config/index.js";
 
 @Injectable()
-class AppService {
+class HelloService {
 	private readonly appConfig: AppConfig;
 	constructor(appConfig: AppConfig) {
 		this.appConfig = appConfig;
@@ -18,4 +18,4 @@ class AppService {
 	}
 }
 
-export default AppService;
+export default HelloService;

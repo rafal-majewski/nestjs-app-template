@@ -1,11 +1,11 @@
 import {NestFactory} from "@nestjs/core";
-import {AppModule} from "./app/index.js";
+import {HelloModule} from "./hello/index.js";
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
 import {AppConfig} from "./app-config/index.js";
 import {VersioningType} from "@nestjs/common";
 
 const bootstrap = async (): Promise<void> => {
-	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+	const app = await NestFactory.create<NestFastifyApplication>(HelloModule, new FastifyAdapter());
 	app.enableVersioning({
 		type: VersioningType.URI,
 	});

@@ -1,31 +1,31 @@
 import {Test} from "@nestjs/testing";
 import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach} from "@jest/globals";
-import {AppModule} from "../../src/app/index.js";
+import {HelloModule} from "../../src/hello/index.js";
 import {AppConfig} from "../../src/app-config/index.js";
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
 
-describe("AppModule", () => {
-	let nestApp: NestFastifyApplication;
+describe("HelloModule", () => {
+	let app: NestFastifyApplication;
 	beforeEach(async () => {
-		const testingModule = await Test.createTestingModule({
-			imports: [AppModule],
+		const appModule = await Test.createTestingModule({
+			imports: [HelloModule],
 		})
 			.overrideProvider(AppConfig)
 			.useValue({
 				CUSTOM_HELLO: "Hello mocked world!",
 			})
 			.compile();
-		nestApp = testingModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-		nestApp.enableVersioning({
+		app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
+		app.enableVersioning({
 			type: VersioningType.URI,
 		});
-		await nestApp.init();
-		await nestApp.getHttpAdapter().getInstance().ready();
+		await app.init();
+		await app.getHttpAdapter().getInstance().ready();
 	});
 
 	test("GET /v2/custom-hello", async () => {
-		const response = await nestApp.inject({
+		const response = await app.inject({
 			method: "GET",
 			url: "/v2/custom-hello",
 		});
@@ -34,7 +34,7 @@ describe("AppModule", () => {
 	});
 
 	test("GET /v1", async () => {
-		const response = await nestApp.inject({
+		const response = await app.inject({
 			method: "GET",
 			url: "/v1",
 		});
@@ -43,7 +43,7 @@ describe("AppModule", () => {
 	});
 
 	test("GET /v2", async () => {
-		const response = await nestApp.inject({
+		const response = await app.inject({
 			method: "GET",
 			url: "/v2",
 		});

@@ -1,15 +1,15 @@
 import {Test, TestingModule} from "@nestjs/testing";
-import {AppController, AppService} from "../../src/app/index.js";
+import {HelloController, HelloService} from "../../src/hello/index.js";
 import {describe, test, expect, beforeEach} from "@jest/globals";
 import {AppConfig} from "../../src/app-config/index.js";
 
-describe("AppController", () => {
-	let appController: AppController;
+describe("HelloController", () => {
+	let helloController: HelloController;
 	beforeEach(async () => {
-		const appModule: TestingModule = await Test.createTestingModule({
+		const helloModule: TestingModule = await Test.createTestingModule({
 			imports: [],
-			controllers: [AppController],
-			providers: [AppService],
+			controllers: [HelloController],
+			providers: [HelloService],
 		})
 			.useMocker((token) => {
 				if (token === AppConfig) {
@@ -20,24 +20,24 @@ describe("AppController", () => {
 				return undefined;
 			})
 			.compile();
-		appController = appModule.get<AppController>(AppController);
+		helloController = helloModule.get<HelloController>(HelloController);
 	});
 
 	describe("custom hello", () => {
 		test('should return "Hello mocked world!"', () => {
-			expect(appController.getCustomHello()).toBe("Hello mocked world!");
+			expect(helloController.getCustomHello()).toBe("Hello mocked world!");
 		});
 	});
 
 	describe("old hello", () => {
 		test('should return "Hello werelld!"', () => {
-			expect(appController.getOldHello()).toBe("Hello werelld!");
+			expect(helloController.getOldHello()).toBe("Hello werelld!");
 		});
 	});
 
 	describe("hello", () => {
 		test('should return "Hello world!"', () => {
-			expect(appController.getHello()).toBe("Hello world!");
+			expect(helloController.getHello()).toBe("Hello world!");
 		});
 	});
 });
