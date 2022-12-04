@@ -7,7 +7,7 @@
 		"start": "NODE_ENV=production node ./dist/src/main.js",
 		"compile": "tsc",
 		"preview": "node ./dist/src/main.js",
-		"dev": "ts-node ./src/main.ts",
+		"dev": "ts-node-esm ./src/main.ts",
 		"jest:check": "jest --passWithNoTests --coverage",
 		"prettier:fix": "prettier --write .",
 		"prettier:check": "prettier --check .",
