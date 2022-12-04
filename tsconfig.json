@@ -42,7 +42,7 @@
 		"sourceMap": false,
 		"allowJs": false,
 		"maxNodeModuleJsDepth": 0,
-		"allowSyntheticDefaultImports": true,
+		"allowSyntheticDefaultImports": false,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
