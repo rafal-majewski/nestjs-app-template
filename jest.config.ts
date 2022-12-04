@@ -1,7 +1,7 @@
 import type {JestConfigWithTsJest} from "ts-jest";
 
 const config: JestConfigWithTsJest = {
-	preset: "ts-jest/presets/default",
+	preset: "ts-jest/presets/js-with-ts-esm",
 	moduleNameMapper: {
 		"^(.*)\\.js$": ["$1.ts", "$1.js"],
 	},
