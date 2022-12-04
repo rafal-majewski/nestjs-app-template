@@ -23,19 +23,19 @@ describe("AppController", () => {
 		appController = appModule.get<AppController>(AppController);
 	});
 
-	describe("/", () => {
+	describe("custom hello", () => {
 		test('should return "Hello mocked world!"', () => {
 			expect(appController.getCustomHello()).toBe("Hello mocked world!");
 		});
 	});
 
-	describe("/v1", () => {
+	describe("old hello", () => {
 		test('should return "Hello werelld!"', () => {
 			expect(appController.getOldHello()).toBe("Hello werelld!");
 		});
 	});
 
-	describe("/v2", () => {
+	describe("hello", () => {
 		test('should return "Hello world!"', () => {
 			expect(appController.getHello()).toBe("Hello world!");
 		});
