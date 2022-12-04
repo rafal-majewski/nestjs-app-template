@@ -10,6 +10,9 @@ class AppService {
 	public getHello(): string {
 		return "Hello world!";
 	}
+	public getOldHello(): string {
+		return "Hello werelld!";
+	}
 	public getCustomHello(): string {
 		return this.appConfig.CUSTOM_HELLO;
 	}

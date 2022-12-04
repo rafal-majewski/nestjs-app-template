@@ -28,4 +28,16 @@ describe("AppController", () => {
 			expect(appController.getCustomHello()).toBe("Hello mocked world!");
 		});
 	});
+
+	describe("/v1", () => {
+		test('should return "Hello werelld!"', () => {
+			expect(appController.getOldHello()).toBe("Hello werelld!");
+		});
+	});
+
+	describe("/v2", () => {
+		test('should return "Hello world!"', () => {
+			expect(appController.getHello()).toBe("Hello world!");
+		});
+	});
 });
