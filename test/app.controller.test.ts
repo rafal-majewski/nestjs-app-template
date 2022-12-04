@@ -5,7 +5,6 @@ import {AppConfig} from "../src/app-config/index.js";
 
 describe("AppController", () => {
 	let appController: AppController;
-
 	beforeEach(async () => {
 		const appModule: TestingModule = await Test.createTestingModule({
 			imports: [],
