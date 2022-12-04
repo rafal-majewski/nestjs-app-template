@@ -52,5 +52,6 @@
 		"class-validator": "^0.13.2",
 		"nest-typed-config": "^2.4.6",
 		"reflect-metadata": "^0.1.13"
-	}
+	},
+	"type": "module"
 }

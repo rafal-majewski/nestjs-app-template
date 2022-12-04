@@ -1,5 +1,5 @@
-import AppController from "./AppController";
-import AppService from "./AppService";
-import AppModule from "./AppModule";
+import AppController from "./AppController.js";
+import AppService from "./AppService.js";
+import AppModule from "./AppModule.js";
 
 export {AppController, AppService, AppModule};

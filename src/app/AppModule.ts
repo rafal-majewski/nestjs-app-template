@@ -1,7 +1,7 @@
 import {Module} from "@nestjs/common";
-import AppController from "./AppController";
-import AppService from "./AppService";
-import {AppConfigModule} from "../app-config";
+import AppController from "./AppController.js";
+import AppService from "./AppService.js";
+import {AppConfigModule} from "../app-config/index.js";
 
 @Module({
 	imports: [AppConfigModule],

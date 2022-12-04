@@ -1,4 +1,4 @@
-import AppConfigModule from "./AppConfigModule";
-import AppConfig from "./AppConfig";
+import AppConfigModule from "./AppConfigModule.js";
+import AppConfig from "./AppConfig.js";
 
 export {AppConfigModule, AppConfig};
