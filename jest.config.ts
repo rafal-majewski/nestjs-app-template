@@ -7,7 +7,7 @@ const config: JestConfigWithTsJest = {
 	},
 	coverageDirectory: "coverage_report",
 	rootDir: ".",
-	testRegex: ["\\.test\\.ts$", "\\.test\\.js$"],
+	testRegex: ["\\.test\\.ts$", "\\.test\\.js$", "\\.test\\.cjs$", "\\.test\\.mjs$"],
 	testPathIgnorePatterns: [
 		"/node_modules/",
 		"/dist/",
