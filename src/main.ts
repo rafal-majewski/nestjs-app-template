@@ -8,6 +8,7 @@ const bootstrap = async (): Promise<void> => {
 	const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
 	app.enableVersioning({
 		type: VersioningType.URI,
+		defaultVersion: ["1", "2"],
 	});
 	const appConfig = app.get(AppConfig);
 	await app.listen(appConfig.PORT);
