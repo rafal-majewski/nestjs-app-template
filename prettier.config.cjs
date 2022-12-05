@@ -7,6 +7,7 @@ module.exports = {
 	endOfLine: "lf",
 	semi: true,
 	bracketSpacing: false,
+	quoteProps: "preserve",
 	plugins: [],
 	pluginSearchDirs: ["."],
 };
