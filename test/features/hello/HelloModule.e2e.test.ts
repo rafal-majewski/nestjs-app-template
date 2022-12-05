@@ -24,10 +24,10 @@ describe("HelloModule", () => {
 		await app.getHttpAdapter().getInstance().ready();
 	});
 	describe("v1", () => {
-		test("GET /", async () => {
+		test("GET /hello", async () => {
 			const response = await app.inject({
 				method: "GET",
-				url: "/v1",
+				url: "/v1/hello",
 			});
 			expect(response.statusCode).toBe(200);
 			expect(response.payload).toBe("Hello werelld!");
@@ -42,10 +42,10 @@ describe("HelloModule", () => {
 			expect(response.statusCode).toBe(200);
 			expect(response.payload).toBe("Hello mocked world!");
 		});
-		test("GET /", async () => {
+		test("GET /hello", async () => {
 			const response = await app.inject({
 				method: "GET",
-				url: "/v2",
+				url: "/v2/hello",
 			});
 			expect(response.statusCode).toBe(200);
 			expect(response.payload).toBe("Hello world!");

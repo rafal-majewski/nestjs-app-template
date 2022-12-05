@@ -1,7 +1,7 @@
 import {Controller, Get, Version} from "@nestjs/common";
 import HelloService from "./HelloService.js";
 
-@Controller()
+@Controller("/")
 class HelloController {
 	private readonly helloService: HelloService;
 
@@ -9,12 +9,12 @@ class HelloController {
 		this.helloService = helloService;
 	}
 	@Version("2")
-	@Get()
+	@Get("/hello")
 	public getHello(): string {
 		return this.helloService.getHello();
 	}
 	@Version("1")
-	@Get()
+	@Get("/hello")
 	public getOldHello(): string {
 		return this.helloService.getOldHello();
 	}
