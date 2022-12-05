@@ -12,6 +12,9 @@ class CatsService {
 	public async getCats(): Promise<CatEntity[]> {
 		return this.catsRepository.find();
 	}
+	public async getCatById(id: string): Promise<CatEntity> {
+		return this.catsRepository.findOneByOrFail({id});
+	}
 }
 
 export default CatsService;
