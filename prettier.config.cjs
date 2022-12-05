@@ -9,5 +9,4 @@ module.exports = {
 	bracketSpacing: false,
 	quoteProps: "preserve",
 	plugins: [],
-	pluginSearchDirs: ["."],
 };
