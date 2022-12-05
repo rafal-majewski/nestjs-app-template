@@ -1,6 +1,18 @@
-import {Controller, Get, HttpStatus, NotFoundException, Param, ParseUUIDPipe} from "@nestjs/common";
+import {
+	Body,
+	Controller,
+	Get,
+	HttpStatus,
+	NotFoundException,
+	Param,
+	ParseUUIDPipe,
+	Post,
+	UsePipes,
+	ValidationPipe,
+} from "@nestjs/common";
 import {EntityNotFoundError} from "typeorm";
 import CatEntity from "./CatEntity.js";
+import CatInPostRequest from "./CatInPostRequest.js";
 import CatsService from "./CatsService.js";
 
 @Controller("/cats")
@@ -33,6 +45,18 @@ class CatsController {
 			}
 			throw error;
 		}
+	}
+	@Post("/")
+	@UsePipes(
+		new ValidationPipe({
+			forbidNonWhitelisted: true,
+			forbidUnknownValues: true,
+			stopAtFirstError: false,
+			whitelist: true,
+		})
+	)
+	public async createCat(@Body() catInPostRequest: CatInPostRequest): Promise<CatEntity> {
+		return this.catsService.createCat(catInPostRequest);
 	}
 }
 
