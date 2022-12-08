@@ -1,5 +1,12 @@
+.DS_Store
 node_modules/
-.vscode/
-dist/
-coverage_report/
+/build/
+/.svelte-kit/
 .env
+.env.*
+!.env.example
+!.env.test
+/dist/
+/coverage/
+.vscode/
+/coverage_report/
