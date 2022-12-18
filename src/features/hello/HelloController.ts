@@ -8,12 +8,12 @@ class HelloController {
 	constructor(helloService: HelloService) {
 		this.helloService = helloService;
 	}
-	@Version("2")
+	@Version(["2"])
 	@Get("/hello")
 	public getHello(): string {
 		return this.helloService.getHello();
 	}
-	@Version("1")
+	@Version(["1"])
 	@Get("/hello")
 	public getOldHello(): string {
 		return this.helloService.getOldHello();

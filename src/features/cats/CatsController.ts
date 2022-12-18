@@ -9,6 +9,7 @@ import {
 	Post,
 	UsePipes,
 	ValidationPipe,
+	Version,
 } from "@nestjs/common";
 import {EntityNotFoundError} from "typeorm";
 import CatEntity from "./CatEntity.js";
@@ -21,10 +22,12 @@ class CatsController {
 	constructor(catsService: CatsService) {
 		this.catsService = catsService;
 	}
+	@Version(["1", "2"])
 	@Get("/")
 	public async getAllCats(): Promise<CatEntity[]> {
 		return this.catsService.getCats();
 	}
+	@Version(["1", "2"])
 	@Get("/:id")
 	public async getCatById(
 		@Param(
@@ -46,6 +49,7 @@ class CatsController {
 			throw error;
 		}
 	}
+	@Version(["1", "2"])
 	@Post("/")
 	@UsePipes(
 		new ValidationPipe({
