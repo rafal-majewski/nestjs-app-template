@@ -1,6 +1,6 @@
 import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 
-class UserToCreate {
+class CatInPostRequest {
 	@IsNotEmpty()
 	@IsString()
 	public readonly name!: string;
@@ -11,4 +11,4 @@ class UserToCreate {
 	public readonly breed!: string;
 }
 
-export default UserToCreate;
+export default CatInPostRequest;
