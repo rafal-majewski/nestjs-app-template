@@ -15,6 +15,7 @@ const config: JestConfigWithTsJest = {
 		"/.vscode/",
 		"/.git/",
 		"/.github/",
+		"/openapi/",
 	],
 };
 
