@@ -170,6 +170,7 @@ const eslintConfig = [
 			"**/.vscode/**",
 			"coverage_report/**",
 			"**/.git/**",
+			"openapi/**",
 		],
 	},
 	prettierEslintConfig,

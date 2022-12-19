@@ -11,22 +11,45 @@ import {
 	ValidationPipe,
 	Version,
 } from "@nestjs/common";
+import {
+	ApiBadRequestResponse,
+	ApiBody,
+	ApiConsumes,
+	ApiCreatedResponse,
+	ApiNotFoundResponse,
+	ApiOkResponse,
+	ApiProduces,
+	ApiTags,
+} from "@nestjs/swagger";
 import {EntityNotFoundError} from "typeorm";
 import CatEntity from "./CatEntity.js";
 import CatInPostRequest from "./CatInPostRequest.js";
 import CatsService from "./CatsService.js";
 
+@ApiTags("cats")
+@ApiProduces("application/json")
 @Controller("/cats")
 class CatsController {
 	private readonly catsService: CatsService;
 	constructor(catsService: CatsService) {
 		this.catsService = catsService;
 	}
+	@ApiOkResponse({
+		description: "All cats",
+		type: [CatEntity],
+	})
 	@Version(["1", "2"])
 	@Get("/")
 	public async getAllCats(): Promise<CatEntity[]> {
 		return this.catsService.getCats();
 	}
+	@ApiOkResponse({
+		description: "Cat with given id",
+		type: CatEntity,
+	})
+	@ApiNotFoundResponse({
+		description: "Cat with given id not found",
+	})
 	@Version(["1", "2"])
 	@Get("/:id")
 	public async getCatById(
@@ -49,6 +72,18 @@ class CatsController {
 			throw error;
 		}
 	}
+	@ApiCreatedResponse({
+		description: "Cat created",
+		type: CatEntity,
+	})
+	@ApiBadRequestResponse({
+		description: "Invalid cat data",
+	})
+	@ApiBody({
+		description: "Cat to create",
+		type: CatInPostRequest,
+	})
+	@ApiConsumes("application/json")
 	@Version(["1", "2"])
 	@Post("/")
 	@UsePipes(

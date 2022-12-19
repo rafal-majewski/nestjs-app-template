@@ -8,6 +8,7 @@
 		"compile": "tsc",
 		"preview": "node ./dist/src/main.js",
 		"dev": "ts-node-esm ./src/main.ts",
+		"generate-openapi": "ts-node-esm ./src/generate-openapi/main.ts",
 		"jest:check": "jest --passWithNoTests --coverage",
 		"prettier:fix": "prettier --write .",
 		"prettier:check": "prettier --check .",
@@ -30,6 +31,7 @@
 	},
 	"homepage": "https://github.com/Rafal-Majewski/nestjs-app-template#readme",
 	"devDependencies": {
+		"@nestjs/swagger": "^6.1.4",
 		"@nestjs/testing": "^9.2.0",
 		"@types/jest": "^29.2.4",
 		"@types/node": "^18.11.15",
@@ -42,7 +44,8 @@
 		"prettier": "^2.8.1",
 		"ts-jest": "^29.0.3",
 		"ts-node": "^10.9.1",
-		"typescript": "^4.9.4"
+		"typescript": "^4.9.4",
+		"yup": "^0.32.11"
 	},
 	"dependencies": {
 		"@nestjs/common": "^9.1.6",
