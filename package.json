@@ -18,7 +18,8 @@
 		"npm-audit:check": "npm audit --audit-level=low",
 		"npm-audit:fix": "npm audit fix",
 		"formatting:fix": "prettier --write .",
-		"formatting:check": "prettier --check ."
+		"formatting:check": "prettier --check .",
+		"compile:check": "tsc --noEmit"
 	},
 	"repository": {
 		"type": "git",
