@@ -1,21 +1,20 @@
+import * as dotenv from "dotenv";
+import * as path from "path";
+dotenv.config({path: path.join(__dirname, ".env.test")});
 import {Test} from "@nestjs/testing";
 import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach} from "@jest/globals";
 import {HelloModule} from "../../../src/features/hello/index.js";
-import {AppConfig} from "../../../src/app-config/index.js";
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
+import {AppConfigModule} from "../../../src/app-config/index.js";
 
 describe("HelloModule", () => {
 	let app: NestFastifyApplication;
 	beforeEach(async () => {
 		const appModule = await Test.createTestingModule({
-			imports: [HelloModule],
-		})
-			.overrideProvider(AppConfig)
-			.useValue({
-				CUSTOM_HELLO: "Hello mocked world!",
-			})
-			.compile();
+			imports: [HelloModule, AppConfigModule],
+		}).compile();
+
 		app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
 		app.enableVersioning({
 			type: VersioningType.URI,
@@ -40,7 +39,7 @@ describe("HelloModule", () => {
 				url: "/v2/custom-hello",
 			});
 			expect(response.statusCode).toBe(200);
-			expect(response.payload).toBe("Hello mocked world!");
+			expect(response.payload).toBe("Hello .env world!");
 		});
 		test("GET /hello", async () => {
 			const response = await app.inject({
