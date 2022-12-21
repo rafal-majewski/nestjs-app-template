@@ -7,6 +7,7 @@ import {
 	Param,
 	ParseUUIDPipe,
 	Post,
+	Query,
 	UsePipes,
 	ValidationPipe,
 	Version,
@@ -25,6 +26,7 @@ import {EntityNotFoundError} from "typeorm";
 import CatEntity from "./CatEntity.js";
 import CatInPostRequest from "./CatInPostRequest.js";
 import CatsService from "./CatsService.js";
+import {Page, PagingOptionsInRequest, ApiPaginatedOkResponse} from "../../paging/index.js";
 
 @ApiTags("cats")
 @ApiProduces("application/json")
@@ -34,14 +36,24 @@ class CatsController {
 	constructor(catsService: CatsService) {
 		this.catsService = catsService;
 	}
-	@ApiOkResponse({
+	@ApiPaginatedOkResponse({
 		description: "All cats",
-		type: [CatEntity],
+		type: CatEntity,
 	})
 	@Version(["1", "2"])
 	@Get("/")
-	public async getAllCats(): Promise<CatEntity[]> {
-		return this.catsService.getCats();
+	public async getAllCats(
+		@Query(
+			new ValidationPipe({
+				transform: true,
+				whitelist: true,
+				errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+			})
+		)
+		pagingOptionsInRequest: PagingOptionsInRequest
+	): Promise<Page<CatEntity>> {
+		const pagingOptions = pagingOptionsInRequest.toPagingOptions();
+		return this.catsService.getCats(pagingOptions);
 	}
 	@ApiOkResponse({
 		description: "Cat with given id",
