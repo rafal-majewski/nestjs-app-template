@@ -3,34 +3,62 @@ import * as path from "path";
 dotenv.config({path: path.join(__dirname, ".env.test")});
 import {Test} from "@nestjs/testing";
 import {VersioningType} from "@nestjs/common";
-import {describe, test, expect} from "@jest/globals";
+import {describe, test, expect, beforeEach, afterEach} from "@jest/globals";
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
-import {CatEntity, CatsModule} from "../../../src/features/cats/index.js";
-import {getRepositoryToken} from "@nestjs/typeorm";
+import {CatsModule} from "../../../src/features/cats/index.js";
+import * as Testcontainers from "testcontainers";
+import {AppOrmModule} from "../../../src/app-orm/index.js";
+import {AppConfig} from "../../../src/app-config/index.js";
+import {TypedConfigModule} from "nest-typed-config";
+
+let postgresqlContainer: Testcontainers.StartedPostgreSqlContainer | null = null;
+let app: NestFastifyApplication | null = null;
+beforeEach(async () => {
+	postgresqlContainer = await new Testcontainers.PostgreSqlContainer().start();
+
+	const AppConfigModule = TypedConfigModule.forRoot({
+		schema: AppConfig,
+		load: () => {
+			if (!postgresqlContainer) {
+				throw new Error("PostgreSQL container is not initialized");
+			}
+			return {
+				POSTGRES_HOST: postgresqlContainer.getHost(),
+				POSTGRES_PORT: postgresqlContainer.getPort(),
+				POSTGRES_USERNAME: postgresqlContainer.getUsername(),
+				POSTGRES_PASSWORD: postgresqlContainer.getPassword(),
+				POSTGRES_DATABASE: postgresqlContainer.getDatabase(),
+			};
+		},
+	});
+	const appModule = await Test.createTestingModule({
+		imports: [CatsModule, AppOrmModule, AppConfigModule],
+	}).compile();
+
+	app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
+	app.enableVersioning({
+		type: VersioningType.URI,
+	});
+	await app.init();
+	await app.getHttpAdapter().getInstance().ready();
+});
+
+afterEach(async () => {
+	if (postgresqlContainer) {
+		await postgresqlContainer.stop();
+	}
+	if (app) {
+		await app.close();
+	}
+});
 
 describe("HelloModule", () => {
 	describe("v2", () => {
 		describe("Empty database", () => {
 			test("GET /cats", async () => {
-				const catsRepositoryMock = {
-					findAndCount() {
-						return Promise.resolve([[], 0]);
-					},
-				};
-				const appModule = await Test.createTestingModule({
-					imports: [CatsModule],
-				})
-					.overrideProvider(getRepositoryToken(CatEntity))
-					.useValue(catsRepositoryMock)
-					.compile();
-
-				const app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-				app.enableVersioning({
-					type: VersioningType.URI,
-				});
-				await app.init();
-				await app.getHttpAdapter().getInstance().ready();
-
+				if (!app) {
+					throw new Error("App is not initialized");
+				}
 				const response = await app.inject({
 					method: "GET",
 					url: "/v2/cats",
@@ -42,25 +70,9 @@ describe("HelloModule", () => {
 				});
 			});
 			test("GET /cats/:id", async () => {
-				const catsRepositoryMock = {
-					findOne() {
-						return Promise.resolve(undefined);
-					},
-				};
-				const appModule = await Test.createTestingModule({
-					imports: [CatsModule],
-				})
-					.overrideProvider(getRepositoryToken(CatEntity))
-					.useValue(catsRepositoryMock)
-					.compile();
-
-				const app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-				app.enableVersioning({
-					type: VersioningType.URI,
-				});
-				await app.init();
-				await app.getHttpAdapter().getInstance().ready();
-
+				if (!app) {
+					throw new Error("App is not initialized");
+				}
 				const response = await app.inject({
 					method: "GET",
 					url: "/v2/cats/1",
@@ -68,25 +80,9 @@ describe("HelloModule", () => {
 				expect(response.statusCode).toBe(404);
 			});
 			test("POST /cats", async () => {
-				const catsRepositoryMock = {
-					save() {
-						return Promise.resolve(undefined);
-					},
-				};
-				const appModule = await Test.createTestingModule({
-					imports: [CatsModule],
-				})
-					.overrideProvider(getRepositoryToken(CatEntity))
-					.useValue(catsRepositoryMock)
-					.compile();
-
-				const app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-				app.enableVersioning({
-					type: VersioningType.URI,
-				});
-				await app.init();
-				await app.getHttpAdapter().getInstance().ready();
-
+				if (!app) {
+					throw new Error("App is not initialized");
+				}
 				const response = await app.inject({
 					method: "POST",
 					url: "/v2/cats",
@@ -101,33 +97,9 @@ describe("HelloModule", () => {
 		});
 		describe("Database with one cat", () => {
 			test("GET /cats", async () => {
-				const catsRepositoryMock = {
-					data: [
-						{
-							id: 1,
-							name: "test",
-							age: 1,
-							breed: "test",
-						},
-					],
-					findAndCount() {
-						return Promise.resolve([this.data, this.data.length]);
-					},
-				};
-				const appModule = await Test.createTestingModule({
-					imports: [CatsModule],
-				})
-					.overrideProvider(getRepositoryToken(CatEntity))
-					.useValue(catsRepositoryMock)
-					.compile();
-
-				const app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-				app.enableVersioning({
-					type: VersioningType.URI,
-				});
-				await app.init();
-				await app.getHttpAdapter().getInstance().ready();
-
+				if (!app) {
+					throw new Error("App is not initialized");
+				}
 				const response = await app.inject({
 					method: "GET",
 					url: "/v2/cats",
