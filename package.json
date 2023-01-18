@@ -5,8 +5,8 @@
 	"private": true,
 	"main": "./src/main.ts",
 	"scripts": {
-		"start": "NODE_ENV=production node ./dist/src/main.js",
 		"test": "jest --passWithNoTests --coverage",
+		"start": "node ./dist/src/main.js",
 		"compile": "tsc",
 		"preview": "node ./dist/src/main.js",
 		"dev": "ts-node-esm ./src/main.ts",
