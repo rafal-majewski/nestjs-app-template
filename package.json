@@ -8,7 +8,6 @@
 		"test": "jest --passWithNoTests --coverage",
 		"start": "node ./dist/src/main.js",
 		"compile": "tsc",
-		"preview": "node ./dist/src/main.js",
 		"dev": "ts-node-esm ./src/main.ts",
 		"generate-openapi": "ts-node-esm ./src/generate_openapi/main.ts",
 		"jest:check": "jest --passWithNoTests --coverage",
