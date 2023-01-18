@@ -4,8 +4,8 @@ import {describe, test, expect, beforeEach, afterEach, beforeAll} from "@jest/gl
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
 import {CatsModule} from "../../../src/features/cats/index.js";
 import * as Testcontainers from "testcontainers";
-import {AppOrmModule} from "../../../src/app-orm/index.js";
-import {AppConfig} from "../../../src/app-config/index.js";
+import {AppOrmModule} from "../../../src/app_orm/index.js";
+import {AppConfig} from "../../../src/app_config/index.js";
 import {TypedConfigModule} from "nest-typed-config";
 import * as fs from "fs/promises";
 import * as TestsUtils from "../../utils/index.js";
