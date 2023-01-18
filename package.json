@@ -11,6 +11,7 @@
 		"dev": "ts-node-esm ./src/main.ts",
 		"generate-openapi": "ts-node-esm ./src/generate_openapi/main.ts",
 		"jest:check": "jest --passWithNoTests --coverage",
+		"jest:check:unit": "jest --testRegex='.+\\.unit\\.test\\.(?:[mc]?js|ts)$' --passWithNoTests --coverage",
 		"prettier:fix": "prettier --write .",
 		"prettier:check": "prettier --check .",
 		"eslint:fix": "eslint --fix .",
