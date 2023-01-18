@@ -13,17 +13,17 @@ import {testsConfig} from "../../tests_config/index.js";
 
 let postgresqlContainer: Testcontainers.StartedPostgreSqlContainer | null = null;
 let app: NestFastifyApplication | null = null;
-let databaseInitializationSql: string | null = null;
+let postgresqlInitializationSqlScript: string | null = null;
 
 beforeAll(async () => {
-	databaseInitializationSql = await fs.readFile(
-		testsConfig.TESTS_POSTGRESQL_INITIALIZATION_SCRIPT_PATH,
+	postgresqlInitializationSqlScript = await fs.readFile(
+		testsConfig.TESTS_POSTGRESQL_INITIALIZATION_SQL_SCRIPT_PATH,
 		"utf-8"
 	);
 });
 
 beforeEach(async () => {
-	if (!databaseInitializationSql) {
+	if (!postgresqlInitializationSqlScript) {
 		throw new Error("Database initialization SQL is not initialized");
 	}
 	const postgresqlContainerPassword = TestsUtils.generatePostgresqlPassword();
@@ -44,7 +44,7 @@ beforeEach(async () => {
 		`--dbname=${postgresqlContainer.getDatabase()}`,
 		`--no-password`,
 		`--command`,
-		`${databaseInitializationSql}`,
+		`${postgresqlInitializationSqlScript}`,
 	]);
 
 	const AppConfigModule = TypedConfigModule.forRoot({
