@@ -1,5 +1,5 @@
 import {Injectable} from "@nestjs/common";
-import {AppConfig} from "../../app_config/index.js";
+import {AppConfig} from "../../config/index.js";
 
 @Injectable()
 class HelloService {

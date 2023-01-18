@@ -1,5 +1,5 @@
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {AppConfig} from "../app_config/index.js";
+import {AppConfig} from "../config/index.js";
 import {CatEntity} from "../features/cats/index.js";
 
 const AppOrmModule = TypeOrmModule.forRootAsync({
