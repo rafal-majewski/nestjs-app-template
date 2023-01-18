@@ -72,7 +72,7 @@ beforeEach(async () => {
 	});
 	await app.init();
 	await app.getHttpAdapter().getInstance().ready();
-});
+}, testsConfig.TESTS_INTEGRATION_TEST_BEFORE_EACH_TIMEOUT * 1000);
 
 afterEach(async () => {
 	if (postgresqlContainer) {
