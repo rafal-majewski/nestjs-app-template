@@ -1,7 +1,7 @@
 import {Test, TestingModule} from "@nestjs/testing";
 import {HelloController, HelloService} from "../../../src/features/hello/index.js";
 import {describe, test, expect, beforeEach} from "@jest/globals";
-import {AppConfig} from "../../../src/app_config/index.js";
+import {AppConfig} from "../../../src/config/index.js";
 
 describe("HelloController", () => {
 	let helloController: HelloController;
