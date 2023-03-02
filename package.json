@@ -55,7 +55,7 @@
 		"yup": "^0.32.11"
 	},
 	"dependencies": {
-		"@nestjs/common": "^9.1.6",
+		"@nestjs/common": "^9.3.9",
 		"@nestjs/core": "^9.1.6",
 		"@nestjs/platform-fastify": "^9.1.6",
 		"@nestjs/typeorm": "^9.0.1",
