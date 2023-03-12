@@ -1,14 +1,10 @@
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
 import {VersioningType} from "@nestjs/common";
 import openApiConfigSchema from "./openApiConfigSchema.js";
-const openApiConfig = await openApiConfigSchema.validate(
+const openApiConfig = await openApiConfigSchema.parse(
 	(
 		await import("../../openapi.config.js")
-	).default,
-	{
-		strict: true,
-		abortEarly: false,
-	}
+	).default
 );
 
 import {SwaggerModule, DocumentBuilder} from "@nestjs/swagger";

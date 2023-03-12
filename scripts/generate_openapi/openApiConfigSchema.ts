@@ -1,18 +1,12 @@
-import yup from "yup";
+import Zod from "zod";
 
-const openApiConfigSchema = yup
-	.object({
-		outputFilePath: yup.string().notRequired(),
-		openApiVersion: yup.string().required(),
-		info: yup
-			.object({
-				title: yup.string().required(),
-				version: yup.string().required(),
-			})
-			.noUnknown()
-			.required(),
-	})
-	.noUnknown()
-	.required();
+const openApiConfigSchema = Zod.object({
+	outputFilePath: Zod.string().optional(),
+	openApiVersion: Zod.string().nonempty(),
+	info: Zod.object({
+		title: Zod.string().nonempty(),
+		version: Zod.string().nonempty(),
+	}),
+});
 
 export default openApiConfigSchema;
