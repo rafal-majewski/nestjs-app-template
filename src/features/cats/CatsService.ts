@@ -3,7 +3,9 @@ import {Repository} from "typeorm";
 import CatEntity from "./CatEntity.js";
 import {InjectRepository} from "@nestjs/typeorm";
 import CatInPostRequest from "./CatInPostRequest.js";
-import {Page, PageMeta, PagingOptions} from "../../paging/index.js";
+import Page from "../../paging/Page.js";
+import PageMeta from "../../paging/PageMeta.js";
+import PagingOptions from "../../paging/PagingOptions.js";
 
 @Injectable()
 class CatsService {

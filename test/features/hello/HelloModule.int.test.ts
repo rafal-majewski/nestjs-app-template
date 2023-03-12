@@ -4,9 +4,9 @@ dotenv.config({path: path.join(__dirname, ".env.test")});
 import {Test} from "@nestjs/testing";
 import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach} from "@jest/globals";
-import {HelloModule} from "../../../src/features/hello/index.js";
+import HelloModule from "../../../src/features/hello/HelloModule.js";
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
-import {AppConfigModule} from "../../../src/config/index.js";
+import AppConfigModule from "../../../src/config/AppConfigModule.js";
 
 describe("HelloModule", () => {
 	let app: NestFastifyApplication;

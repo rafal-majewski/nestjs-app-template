@@ -26,7 +26,9 @@ import {EntityNotFoundError} from "typeorm";
 import CatEntity from "./CatEntity.js";
 import CatInPostRequest from "./CatInPostRequest.js";
 import CatsService from "./CatsService.js";
-import {Page, PagingOptionsInRequest, ApiPaginatedOkResponse} from "../../paging/index.js";
+import Page from "../../paging/Page.js";
+import PagingOptionsInRequest from "../../paging/PagingOptionsInRequest.js";
+import ApiPaginatedOkResponse from "../../paging/ApiPaginatedOkResponse.js";
 
 @ApiTags("cats")
 @ApiProduces("application/json")
