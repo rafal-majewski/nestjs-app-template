@@ -2,14 +2,15 @@ import {Test} from "@nestjs/testing";
 import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach, afterEach, beforeAll} from "@jest/globals";
 import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
-import {CatsModule} from "../../../src/features/cats/index.js";
+import CatsModule from "../../../src/features/cats/CatsModule.js";
 import * as Testcontainers from "testcontainers";
-import {AppOrmModule} from "../../../src/orm/index.js";
-import {AppConfig} from "../../../src/config/index.js";
+import AppOrmModule from "../../../src/orm/AppOrmModule.js";
+import AppConfig from "../../../src/config/AppConfig.js";
 import {TypedConfigModule} from "nest-typed-config";
 import * as fs from "fs/promises";
-import * as TestsUtils from "../../utils/index.js";
-import {testsConfig} from "../../config/index.js";
+
+import testsConfig from "../../config/testsConfig.js";
+import generatePostgresqlPassword from "../../utils/generatePostgresqlPassword.js";
 
 let postgresqlContainer: Testcontainers.StartedPostgreSqlContainer | null = null;
 let app: NestFastifyApplication | null = null;
@@ -26,7 +27,7 @@ beforeEach(async () => {
 	if (!postgresqlInitializationSqlScript) {
 		throw new Error("Database initialization SQL is not initialized");
 	}
-	const postgresqlContainerPassword = TestsUtils.generatePostgresqlPassword();
+	const postgresqlContainerPassword = generatePostgresqlPassword();
 
 	const postgresqlContainer = await new Testcontainers.PostgreSqlContainer(
 		testsConfig.TESTS_POSTGRESQL_CONTAINER_IMAGE_NAME

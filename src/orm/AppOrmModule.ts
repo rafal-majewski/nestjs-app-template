@@ -1,6 +1,7 @@
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {AppConfig} from "../config/index.js";
-import {CatEntity} from "../features/cats/index.js";
+
+import AppConfig from "../config/AppConfig.js";
+import CatEntity from "../features/cats/CatEntity.js";
 
 const AppOrmModule = TypeOrmModule.forRootAsync({
 	inject: [AppConfig],
