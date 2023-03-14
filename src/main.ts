@@ -1,6 +1,6 @@
 import {NestFactory} from "@nestjs/core";
 import AppModule from "./AppModule.js";
-import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
+import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
 import AppConfig from "./config/AppConfig.js";
 import {VersioningType} from "@nestjs/common";
 
