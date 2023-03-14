@@ -1,7 +1,7 @@
 import {Test} from "@nestjs/testing";
 import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach, afterEach, beforeAll} from "@jest/globals";
-import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
+import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
 import CatsModule from "../../../src/features/cats/CatsModule.js";
 import * as Testcontainers from "testcontainers";
 import AppOrmModule from "../../../src/orm/AppOrmModule.js";

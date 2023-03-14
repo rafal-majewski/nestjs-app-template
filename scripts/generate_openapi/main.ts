@@ -1,4 +1,4 @@
-import {FastifyAdapter, NestFastifyApplication} from "@nestjs/platform-fastify";
+import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
 import {VersioningType} from "@nestjs/common";
 import openApiConfigSchema from "./openApiConfigSchema.js";
 const openApiConfig = await openApiConfigSchema.parse(
