@@ -4,7 +4,7 @@ on:
   push:
 
 env:
-  SETUP_NODE_NODE_VERSION: 19
+  SETUP_NODE_NODE_VERSION: 19.7
 
 jobs:
   prettier-check:
