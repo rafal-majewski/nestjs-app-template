@@ -7,7 +7,7 @@ env:
   SETUP_NODE_NODE_VERSION: 19.7
 
 jobs:
-  prettier-check:
+  prettier_check:
     name: Prettier check
     runs-on: ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
       - name: Run prettier
         run: |
           npm run prettier:check
-  generate-openapi:
+  generate_openapi:
     name: Generate OpenAPI
     runs-on: ubuntu-latest
     steps:
@@ -46,7 +46,7 @@ jobs:
         with:
           name: openapi
           path: openapi
-  eslint-check:
+  eslint_check:
     name: ESLint check
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +63,7 @@ jobs:
       - name: Run eslint
         run: |
           npm run eslint:check
-  jest-check-unit:
+  jest_check_unit:
     name: Jest check unit tests
     runs-on: ubuntu-latest
     steps:
@@ -85,7 +85,7 @@ jobs:
         with:
           name: coverage_report
           path: coverage_report
-  jest-check-int:
+  jest_check_int:
     name: Jest check integration tests
     runs-on: ubuntu-latest
     steps:
@@ -107,7 +107,7 @@ jobs:
         with:
           name: coverage_report
           path: coverage_report
-  npm-audit-check:
+  npm_audit_check:
     name: npm audit check
     runs-on: ubuntu-latest
     steps:
@@ -121,7 +121,7 @@ jobs:
       - name: Run npm audit
         run: |
           npm run npm-audit:check
-  typescript-check:
+  typescript_check:
     name: TypeScript check
     runs-on: ubuntu-latest
     steps:
@@ -140,7 +140,7 @@ jobs:
           npm run typescript:check
   compile:
     name: Compile
-    needs: [eslint-check, jest-check-unit, jest-check-int, typescript-check]
+    needs: [eslint_check, jest_check_unit, jest_check_int, typescript_check]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
