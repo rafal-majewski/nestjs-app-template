@@ -59,7 +59,7 @@
 		"zod": "^3.21.4"
 	},
 	"dependencies": {
-		"@nestjs/common": "^9.3.9",
+		"@nestjs/common": "^9.3.10",
 		"@nestjs/core": "^9.1.6",
 		"@nestjs/platform-fastify": "^9.3.9",
 		"@nestjs/typeorm": "^9.0.1",
