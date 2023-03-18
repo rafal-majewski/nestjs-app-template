@@ -22,9 +22,7 @@ COPY --chown=appuser:appuser package.json ./
 COPY --chown=appuser:appuser package-lock.json ./
 COPY --chown=appuser:appuser --from=builder /app/dist ./dist
 
-RUN npm ci --production
-
-RUN chown -R appuser:appuser /home/appuser
+RUN chown -R appuser:appuser /home/appuser && npm ci --production
 
 EXPOSE 3000
 
