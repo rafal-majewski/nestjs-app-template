@@ -24,7 +24,8 @@
 		"formatting:fix": "prettier --write .",
 		"formatting:check": "prettier --check .",
 		"compile:check": "tsc --noEmit",
-		"release": "release-it"
+		"release": "release-it",
+		"hadolint:check": "hadolint --failure-threshold=info Dockerfile"
 	},
 	"repository": {
 		"type": "git",
