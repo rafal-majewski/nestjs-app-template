@@ -38,7 +38,6 @@
 	},
 	"homepage": "https://github.com/Rafal-Majewski/nestjs-app-template#readme",
 	"devDependencies": {
-		"@nestjs/swagger": "^6.2.1",
 		"@nestjs/testing": "^9.2.0",
 		"@types/jest": "^29.5.0",
 		"@types/node": "^18.15.3",
@@ -63,6 +62,7 @@
 		"@nestjs/common": "^9.3.10",
 		"@nestjs/core": "^9.1.6",
 		"@nestjs/platform-fastify": "^9.3.10",
+		"@nestjs/swagger": "^6.2.1",
 		"@nestjs/typeorm": "^9.0.1",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.0",
