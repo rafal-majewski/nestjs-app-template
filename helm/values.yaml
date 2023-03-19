@@ -1,0 +1,9 @@
+port: 3000
+
+postgresql:
+  auth:
+    database: "nestjs-app-template"
+    username: "nestjs-app-template"
+  primary:
+    initdb:
+      scripts-configmap: "nestjs-app-template-postgresql-initdb-scripts"
