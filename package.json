@@ -38,6 +38,7 @@
 	},
 	"homepage": "https://github.com/Rafal-Majewski/nestjs-app-template#readme",
 	"devDependencies": {
+		"@j-ulrich/release-it-regex-bumper": "^4.1.1",
 		"@nestjs/testing": "^9.2.0",
 		"@types/jest": "^29.5.0",
 		"@types/node": "^18.15.3",
