@@ -7,3 +7,6 @@ postgresql:
   primary:
     initdb:
       scripts-configmap: "nestjs-app-template-postgresql-initdb-scripts"
+
+image:
+  repository: null

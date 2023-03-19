@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: "{{ .Release.Name }}"
-          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          image: "{{ required `A valid image repository is required` .Values.image.repository | }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: Always
           resources:
             limits:
