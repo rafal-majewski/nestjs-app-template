@@ -7,6 +7,27 @@ env:
   SETUP_NODE_NODE_VERSION: 19.7
 
 jobs:
+  helm_lint_check:
+    name: Helm lint check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.SETUP_NODE_NODE_VERSION }}
+          cache: "npm"
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.11.2
+      - name: Run Helm lint
+        run: |
+          npm run helm-lint:check
   hadolint_check:
     name: Hadolint check
     runs-on: ubuntu-latest
