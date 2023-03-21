@@ -201,3 +201,41 @@ jobs:
         with:
           name: dist
           path: dist
+  helm_package:
+    name: Helm package
+    needs: [helm_lint_check]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.SETUP_NODE_NODE_VERSION }}
+          cache: "npm"
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Remember Helm chart version
+        id: remember_helm_chart_version
+        run: |
+          echo "helm_chart_version=$(grep '^version:' ./helm/Chart.yaml | awk '{print $2}')" >> $GITHUB_OUTPUT
+      - name: Remember Helm chart name
+        id: remember_helm_chart_name
+        run: |
+          echo "helm_chart_name=$(grep '^name:' ./helm/Chart.yaml | awk '{print $2}')" >> $GITHUB_OUTPUT
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.11.2
+      - name: Add Bitnami Helm repository
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+      - name: Run Helm package
+        run: |
+          npm run helm-package
+      - name: Upload Helm package
+        uses: actions/upload-artifact@v3
+        with:
+          name: helm_chart
+          path: ./${{ steps.remember_helm_chart_name.outputs.helm_chart_name }}-${{ steps.remember_helm_chart_version.outputs.helm_chart_version }}.tgz
