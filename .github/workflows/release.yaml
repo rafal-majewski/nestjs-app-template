@@ -60,6 +60,12 @@ jobs:
         run: tar -xzf ./${{github.event.repository.name}}-${{ needs.release.outputs.release_version }}.tar.gz
       - name: Remove tarball
         run: rm ./${{github.event.repository.name}}-${{ needs.release.outputs.release_version }}.tar.gz
+      - name: Move the files to the current directory
+        run: |
+          shopt -s dotglob
+          mv ./${{github.event.repository.owner.login}}-${{github.event.repository.name}}-*/* ./
+          shopt -u dotglob
+          rm -rf ./${{github.event.repository.owner.login}}-${{github.event.repository.name}}-*/
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Docker Hub
@@ -70,5 +76,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
+          context: .
           push: true
           tags: ${{secrets.DOCKER_HUB_USERNAME}}/${{github.event.repository.name}}:${{ needs.release.outputs.release_version }}
