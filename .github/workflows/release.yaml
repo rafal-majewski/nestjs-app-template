@@ -116,9 +116,6 @@ jobs:
       - name: Add Bitnami Helm repository
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
-      - name: Build Helm chart dependencies
-        run: |
-          helm dependency build helm/
       - name: Run Helm package
         run: |
           npm run helm-package
