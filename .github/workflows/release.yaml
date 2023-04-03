@@ -14,6 +14,7 @@ on:
 
 env:
   SETUP_NODE_NODE_VERSION: 19.7
+  SETUP_HELM_HELM_VERSION: v3.11.2
 
 jobs:
   release:
@@ -79,3 +80,50 @@ jobs:
           context: .
           push: true
           tags: ${{secrets.DOCKER_HUB_USERNAME}}/${{github.event.repository.name}}:${{ needs.release.outputs.release_version }}
+
+  helm_package:
+    name: Helm package
+    needs: [release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download release
+        uses: robinraju/release-downloader@v1.7
+        with:
+          tag: ${{ needs.release.outputs.release_version }}
+          tarBall: true
+      - name: Unpack release
+        run: tar -xzf ./${{github.event.repository.name}}-${{ needs.release.outputs.release_version }}.tar.gz
+      - name: Remove tarball
+        run: rm ./${{github.event.repository.name}}-${{ needs.release.outputs.release_version }}.tar.gz
+      - name: Move the files to the current directory
+        run: |
+          shopt -s dotglob
+          mv ./${{github.event.repository.owner.login}}-${{github.event.repository.name}}-*/* ./
+          shopt -u dotglob
+          rm -rf ./${{github.event.repository.owner.login}}-${{github.event.repository.name}}-*/
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: ${{ env.SETUP_HELM_HELM_VERSION }}
+      - name: Remember Helm chart version
+        id: remember_helm_chart_version
+        run: |
+          echo "helm_chart_version=$(grep '^version:' ./helm/Chart.yaml | awk '{print $2}')" >> $GITHUB_OUTPUT
+      - name: Remember Helm chart name
+        id: remember_helm_chart_name
+        run: |
+          echo "helm_chart_name=$(grep '^name:' ./helm/Chart.yaml | awk '{print $2}')" >> $GITHUB_OUTPUT
+      - name: Add Bitnami Helm repository
+        run: |
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+      - name: Build Helm chart dependencies
+        run: |
+          helm dependency build helm/
+      - name: Run Helm package
+        run: |
+          npm run helm-package
+      - name: Upload Helm package
+        uses: actions/upload-artifact@v3
+        with:
+          name: helm_chart
+          path: ./${{ steps.remember_helm_chart_name.outputs.helm_chart_name }}-${{ steps.remember_helm_chart_version.outputs.helm_chart_version }}.tgz
