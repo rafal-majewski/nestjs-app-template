@@ -1,6 +1,6 @@
 {
 	"name": "nestjs-app-template",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"description": "Nest.js app template",
 	"private": true,
 	"main": "./src/main.ts",
