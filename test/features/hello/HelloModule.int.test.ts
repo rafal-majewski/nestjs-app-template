@@ -18,7 +18,7 @@ describe("HelloModule", () => {
 		app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
 		app.enableVersioning({
 			type: VersioningType.URI,
-			defaultVersion: "2",
+			defaultVersion: ["1", "2"],
 		});
 		await app.init();
 		await app.getHttpAdapter().getInstance().ready();

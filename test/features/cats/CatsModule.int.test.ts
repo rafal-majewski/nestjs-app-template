@@ -70,7 +70,7 @@ beforeEach(async () => {
 	app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
 	app.enableVersioning({
 		type: VersioningType.URI,
-		defaultVersion: "2",
+		defaultVersion: ["1", "2"],
 	});
 	await app.init();
 	await app.getHttpAdapter().getInstance().ready();
@@ -94,7 +94,7 @@ describe("HelloModule", () => {
 				}
 				const response = await app.inject({
 					method: "GET",
-					url: "/v2/cats",
+					url: "/v1/cats",
 				});
 				expect(response.statusCode).toBe(200);
 				expect(response.json()).toEqual({
@@ -108,7 +108,7 @@ describe("HelloModule", () => {
 				}
 				const response = await app.inject({
 					method: "GET",
-					url: "/v2/cats/1",
+					url: "/v1/cats/1",
 				});
 				expect(response.statusCode).toBe(404);
 			});
@@ -123,7 +123,7 @@ describe("HelloModule", () => {
 				} as const;
 				const response = await app.inject({
 					method: "POST",
-					url: "/v2/cats",
+					url: "/v1/cats",
 					payload: addCatRequestBody,
 				});
 				expect(response.statusCode).toBe(201);
