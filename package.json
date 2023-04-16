@@ -3,7 +3,7 @@
 	"version": "1.5.0",
 	"description": "Nest.js app template",
 	"private": true,
-	"main": "./src/main.ts",
+	"main": "./dist/src/main.js",
 	"scripts": {
 		"test": "jest --passWithNoTests --coverage",
 		"start": "node ./dist/src/main.js",
