@@ -33,7 +33,6 @@ class HelloController {
 		description: "Custom hello",
 		type: String,
 	})
-	@Version(["1", "2"])
 	@Get("custom-hello")
 	public getCustomHello(): string {
 		return this.helloService.getCustomHello();
