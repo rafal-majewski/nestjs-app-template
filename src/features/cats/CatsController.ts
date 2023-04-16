@@ -8,7 +8,6 @@ import {
 	ParseUUIDPipe,
 	Post,
 	Query,
-	UsePipes,
 	ValidationPipe,
 	Version,
 } from "@nestjs/common";
@@ -100,15 +99,17 @@ class CatsController {
 	@ApiConsumes("application/json")
 	@Version(["1", "2"])
 	@Post("/")
-	@UsePipes(
-		new ValidationPipe({
-			forbidNonWhitelisted: true,
-			forbidUnknownValues: true,
-			stopAtFirstError: false,
-			whitelist: true,
-		})
-	)
-	public async createCat(@Body() catInPostRequest: CatInPostRequest): Promise<CatEntity> {
+	public async createCat(
+		@Body(
+			new ValidationPipe({
+				forbidNonWhitelisted: true,
+				forbidUnknownValues: true,
+				stopAtFirstError: false,
+				whitelist: true,
+			})
+		)
+		catInPostRequest: CatInPostRequest
+	): Promise<CatEntity> {
 		return this.catsService.createCat(catInPostRequest);
 	}
 }
