@@ -14,6 +14,7 @@ on:
 
 env:
   SETUP_NODE_NODE_VERSION: 19.7
+  SETUP_HELM_HELM_VERSION: v3.11.2
 
 jobs:
   release:
