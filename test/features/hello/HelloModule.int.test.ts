@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import * as path from "path";
 dotenv.config({path: path.join(__dirname, ".env.test")});
 import {Test} from "@nestjs/testing";
-import {describe, test, expect, beforeEach} from "@jest/globals";
+import {describe, test, expect, beforeEach, afterEach} from "@jest/globals";
 import HelloModule from "../../../src/features/hello/HelloModule.js";
 import type {NestFastifyApplication} from "@nestjs/platform-fastify";
 import AppConfigModule from "../../../src/app_config/AppConfigModule.js";
@@ -17,6 +17,9 @@ describe("HelloModule", () => {
 		}).compile();
 
 		app = await createTestingApp(appModule);
+	});
+	afterEach(async () => {
+		await app.close();
 	});
 	describe("v1", () => {
 		test("GET /hello", async () => {
