@@ -44,9 +44,8 @@ class CatsController {
 	public async getAllCats(
 		@Query(
 			new ValidationPipe({
-				transform: true,
-				whitelist: true,
-				errorHttpStatusCode: HttpStatus.BAD_REQUEST,
+				transform: true, // Transform to instance of PagingOptionsInRequest
+				whitelist: true, // Do not put other query parameters into the object
 			})
 		)
 		pagingOptionsInRequest: PagingOptionsInRequest
@@ -98,10 +97,8 @@ class CatsController {
 	public async createCat(
 		@Body(
 			new ValidationPipe({
-				forbidNonWhitelisted: true,
-				forbidUnknownValues: true,
-				stopAtFirstError: false,
-				whitelist: true,
+				whitelist: true, // Do not allow other properties than those defined in CatInPostRequest
+				forbidNonWhitelisted: true, // Throw an error if other properties than those defined in CatInPostRequest are present
 			})
 		)
 		catInPostRequest: CatInPostRequest
