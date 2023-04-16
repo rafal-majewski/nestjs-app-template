@@ -6,7 +6,7 @@ import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach} from "@jest/globals";
 import HelloModule from "../../../src/features/hello/HelloModule.js";
 import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
-import AppConfigModule from "../../../src/config/AppConfigModule.js";
+import AppConfigModule from "../../../src/app_config/AppConfigModule.js";
 
 describe("HelloModule", () => {
 	let app: NestFastifyApplication;
