@@ -5,11 +5,11 @@ import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fast
 import CatsModule from "../../../src/features/cats/CatsModule.js";
 import * as Testcontainers from "testcontainers";
 import AppOrmModule from "../../../src/orm/AppOrmModule.js";
-import AppConfig from "../../../src/config/AppConfig.js";
+import AppConfig from "../../../src/app_config/AppConfig.js";
 import {TypedConfigModule} from "nest-typed-config";
 import * as fs from "fs/promises";
 
-import testsConfig from "../../config/testsConfig.js";
+import testsConfig from "../../app_config/testsConfig.js";
 import generatePostgresqlPassword from "../../utils/generatePostgresqlPassword.js";
 
 let postgresqlContainer: Testcontainers.StartedPostgreSqlContainer | null = null;
