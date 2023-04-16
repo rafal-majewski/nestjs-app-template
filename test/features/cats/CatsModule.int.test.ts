@@ -70,6 +70,7 @@ beforeEach(async () => {
 	app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
 	app.enableVersioning({
 		type: VersioningType.URI,
+		defaultVersion: "2",
 	});
 	await app.init();
 	await app.getHttpAdapter().getInstance().ready();
@@ -85,6 +86,50 @@ afterEach(async () => {
 });
 
 describe("HelloModule", () => {
+	describe("v1", () => {
+		describe("Empty database", () => {
+			test("GET /cats", async () => {
+				if (!app) {
+					throw new Error("App is not initialized");
+				}
+				const response = await app.inject({
+					method: "GET",
+					url: "/v2/cats",
+				});
+				expect(response.statusCode).toBe(200);
+				expect(response.json()).toEqual({
+					data: [],
+					meta: {skip: 0, take: 10, totalItemsCount: 0, pageItemsCount: 0},
+				});
+			});
+			test("GET /cats/:id", async () => {
+				if (!app) {
+					throw new Error("App is not initialized");
+				}
+				const response = await app.inject({
+					method: "GET",
+					url: "/v2/cats/1",
+				});
+				expect(response.statusCode).toBe(404);
+			});
+			test("POST /cats", async () => {
+				if (!app) {
+					throw new Error("App is not initialized");
+				}
+				const addCatRequestBody = {
+					name: "test2",
+					age: 1,
+					breed: "test",
+				} as const;
+				const response = await app.inject({
+					method: "POST",
+					url: "/v2/cats",
+					payload: addCatRequestBody,
+				});
+				expect(response.statusCode).toBe(201);
+			});
+		});
+	});
 	describe("v2", () => {
 		describe("Empty database", () => {
 			test("GET /cats", async () => {

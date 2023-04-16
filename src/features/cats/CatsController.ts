@@ -9,7 +9,6 @@ import {
 	Post,
 	Query,
 	ValidationPipe,
-	Version,
 } from "@nestjs/common";
 import {
 	ApiBadRequestResponse,
@@ -41,7 +40,6 @@ class CatsController {
 		description: "All cats",
 		type: CatEntity,
 	})
-	@Version(["1", "2"])
 	@Get("/")
 	public async getAllCats(
 		@Query(
@@ -63,7 +61,6 @@ class CatsController {
 	@ApiNotFoundResponse({
 		description: "Cat with given id not found",
 	})
-	@Version(["1", "2"])
 	@Get("/:id")
 	public async getCatById(
 		@Param(
@@ -97,7 +94,6 @@ class CatsController {
 		type: CatInPostRequest,
 	})
 	@ApiConsumes("application/json")
-	@Version(["1", "2"])
 	@Post("/")
 	public async createCat(
 		@Body(
