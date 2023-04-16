@@ -25,7 +25,7 @@
 		"formatting:check": "prettier --check .",
 		"compile:check": "tsc --noEmit",
 		"release": "release-it",
-		"hadolint:check": "hadolint --failure-threshold=info Dockerfile",
+		"hadolint:check": "hadolint Dockerfile",
 		"helm-lint:check": "helm lint helm",
 		"helm-package": "helm dependency build helm && helm package helm"
 	},
