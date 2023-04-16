@@ -35,19 +35,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.SETUP_NODE_NODE_VERSION }}
-          cache: "npm"
-      - name: Install Hadolint
-        run: |
-          wget -O hadolint https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64
-          chmod +x hadolint
-          sudo mv hadolint /usr/local/bin/
       - name: Run Hadolint
-        run: |
-          npm run hadolint:check
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
   prettier_check:
     name: Prettier check
     runs-on: ubuntu-latest
