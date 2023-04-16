@@ -6,7 +6,6 @@ import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
 import * as typescriptEslintParser from "@typescript-eslint/parser";
 import * as espreeParser from "espree";
 import globals from "globals";
-import prettierEslintConfig from "eslint-config-prettier";
 import jestEslintPlugin from "eslint-plugin-jest";
 
 const eslintConfig = [
@@ -173,7 +172,6 @@ const eslintConfig = [
 			"openapi/**",
 		],
 	},
-	prettierEslintConfig,
 ];
 
 export default eslintConfig;
