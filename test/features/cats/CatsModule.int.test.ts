@@ -1,6 +1,6 @@
 import {Test} from "@nestjs/testing";
 import {describe, test, expect, beforeEach, afterEach, beforeAll} from "@jest/globals";
-import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
+import type {NestFastifyApplication} from "@nestjs/platform-fastify";
 import CatsModule from "../../../src/features/cats/CatsModule.js";
 import * as Testcontainers from "testcontainers";
 import AppOrmModule from "../../../src/orm/AppOrmModule.js";
@@ -10,7 +10,7 @@ import * as fs from "fs/promises";
 
 import testsConfig from "../../app_config/testsConfig.js";
 import generatePostgresqlPassword from "../../utils/generatePostgresqlPassword.js";
-import initializeApp from "../../../src/initializeApp.js";
+import createTestingApp from "../../utils/createTestingApp.js";
 
 let postgresqlContainer: Testcontainers.StartedPostgreSqlContainer | null = null;
 let app: NestFastifyApplication | null = null;
@@ -67,10 +67,7 @@ beforeEach(async () => {
 		imports: [CatsModule, AppOrmModule, AppConfigModule],
 	}).compile();
 
-	app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-	initializeApp(app);
-	await app.init();
-	await app.getHttpAdapter().getInstance().ready();
+	app = await createTestingApp(appModule);
 }, testsConfig.TESTS_INTEGRATION_TEST_BEFORE_EACH_TIMEOUT * 1000);
 
 afterEach(async () => {
