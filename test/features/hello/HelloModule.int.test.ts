@@ -2,11 +2,11 @@ import * as dotenv from "dotenv";
 import * as path from "path";
 dotenv.config({path: path.join(__dirname, ".env.test")});
 import {Test} from "@nestjs/testing";
-import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach} from "@jest/globals";
 import HelloModule from "../../../src/features/hello/HelloModule.js";
 import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
 import AppConfigModule from "../../../src/app_config/AppConfigModule.js";
+import initializeApp from "../../../src/initializeApp.js";
 
 describe("HelloModule", () => {
 	let app: NestFastifyApplication;
@@ -16,10 +16,7 @@ describe("HelloModule", () => {
 		}).compile();
 
 		app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-		app.enableVersioning({
-			type: VersioningType.URI,
-			defaultVersion: ["1", "2"],
-		});
+		initializeApp(app);
 		await app.init();
 		await app.getHttpAdapter().getInstance().ready();
 	});
