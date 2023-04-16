@@ -7,7 +7,7 @@ import {VersioningType} from "@nestjs/common";
 const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
 app.enableVersioning({
 	type: VersioningType.URI,
-	defaultVersion: "2",
+	defaultVersion: ["1", "2"],
 });
 const appConfig = app.get(AppConfig);
 await app.listen(appConfig.PORT);
