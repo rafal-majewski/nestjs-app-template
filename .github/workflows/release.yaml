@@ -129,18 +129,18 @@ jobs:
 
   helm_package:
     name: Helm package
-    needs: [compile]
+    needs: [release]
     runs-on: ubuntu-latest
     steps:
       - name: Download release
         uses: robinraju/release-downloader@v1.7
         with:
-          tag: ${{ needs.compile.outputs.release_version }}
+          tag: ${{ needs.release.outputs.release_version }}
           tarBall: true
       - name: Unpack release
-        run: tar -xzf ./${{github.event.repository.name}}-${{ needs.compile.outputs.release_version }}.tar.gz
+        run: tar -xzf ./${{github.event.repository.name}}-${{ needs.release.outputs.release_version }}.tar.gz
       - name: Remove tarball
-        run: rm ./${{github.event.repository.name}}-${{ needs.compile.outputs.release_version }}.tar.gz
+        run: rm ./${{github.event.repository.name}}-${{ needs.release.outputs.release_version }}.tar.gz
       - name: Move the files to the current directory
         run: |
           shopt -s dotglob
