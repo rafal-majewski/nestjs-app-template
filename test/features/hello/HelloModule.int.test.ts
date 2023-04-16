@@ -4,9 +4,10 @@ dotenv.config({path: path.join(__dirname, ".env.test")});
 import {Test} from "@nestjs/testing";
 import {describe, test, expect, beforeEach} from "@jest/globals";
 import HelloModule from "../../../src/features/hello/HelloModule.js";
-import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
+import type {NestFastifyApplication} from "@nestjs/platform-fastify";
 import AppConfigModule from "../../../src/app_config/AppConfigModule.js";
-import initializeApp from "../../../src/initializeApp.js";
+
+import createTestingApp from "../../utils/createTestingApp.js";
 
 describe("HelloModule", () => {
 	let app: NestFastifyApplication;
@@ -15,10 +16,7 @@ describe("HelloModule", () => {
 			imports: [HelloModule, AppConfigModule],
 		}).compile();
 
-		app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-		initializeApp(app);
-		await app.init();
-		await app.getHttpAdapter().getInstance().ready();
+		app = await createTestingApp(appModule);
 	});
 	describe("v1", () => {
 		test("GET /hello", async () => {
