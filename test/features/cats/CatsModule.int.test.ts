@@ -1,5 +1,4 @@
 import {Test} from "@nestjs/testing";
-import {VersioningType} from "@nestjs/common";
 import {describe, test, expect, beforeEach, afterEach, beforeAll} from "@jest/globals";
 import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fastify";
 import CatsModule from "../../../src/features/cats/CatsModule.js";
@@ -11,6 +10,7 @@ import * as fs from "fs/promises";
 
 import testsConfig from "../../app_config/testsConfig.js";
 import generatePostgresqlPassword from "../../utils/generatePostgresqlPassword.js";
+import initializeApp from "../../../src/initializeApp.js";
 
 let postgresqlContainer: Testcontainers.StartedPostgreSqlContainer | null = null;
 let app: NestFastifyApplication | null = null;
@@ -68,10 +68,7 @@ beforeEach(async () => {
 	}).compile();
 
 	app = appModule.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
-	app.enableVersioning({
-		type: VersioningType.URI,
-		defaultVersion: ["1", "2"],
-	});
+	initializeApp(app);
 	await app.init();
 	await app.getHttpAdapter().getInstance().ready();
 }, testsConfig.TESTS_INTEGRATION_TEST_BEFORE_EACH_TIMEOUT * 1000);
