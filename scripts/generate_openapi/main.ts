@@ -8,8 +8,8 @@ const openApiConfig = await openApiConfigSchema.parse(
 );
 
 import {SwaggerModule, DocumentBuilder} from "@nestjs/swagger";
-import * as path from "path";
-import * as fs from "fs/promises";
+import * as Path from "path";
+import * as Fs from "fs/promises";
 import {Test} from "@nestjs/testing";
 import {getRepositoryToken} from "@nestjs/typeorm";
 import CatEntity from "../../src/features/cats/CatEntity.js";
@@ -33,7 +33,7 @@ const swaggerOptions = new DocumentBuilder()
 	.setVersion(openApiConfig.info.version)
 	.build();
 const document = SwaggerModule.createDocument(app, swaggerOptions);
-const outputFilePath = openApiConfig.outputFilePath ?? path.join("openapi", "openapi.json");
-await fs.mkdir(path.dirname(outputFilePath), {recursive: true});
-const outputPath = path.resolve(process.cwd(), outputFilePath);
-await fs.writeFile(outputPath, JSON.stringify(document), {encoding: "utf8"});
+const outputFilePath = openApiConfig.outputFilePath ?? Path.join("openapi", "openapi.json");
+await Fs.mkdir(Path.dirname(outputFilePath), {recursive: true});
+const outputPath = Path.resolve(process.cwd(), outputFilePath);
+await Fs.writeFile(outputPath, JSON.stringify(document), {encoding: "utf8"});
