@@ -8,4 +8,4 @@ const app = await NestFactory.create<NestFastifyApplication>(AppModule, new Fast
 initializeApp(app);
 const appConfig = app.get(AppConfig);
 await app.listen(appConfig.PORT);
-console.log(`Next.js server listening at ${await app.getUrl()}`);
+console.log(`Nest.js server listening at ${await app.getUrl()}`);
