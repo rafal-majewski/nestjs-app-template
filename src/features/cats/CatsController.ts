@@ -25,7 +25,7 @@ import CatEntity from "./CatEntity.js";
 import CatInPostRequest from "./CatInPostRequest.js";
 import CatsService from "./CatsService.js";
 import Page from "../../paging/Page.js";
-import PagingOptionsInRequest from "../../paging/PagingOptionsInRequest.js";
+import PagingOptions from "../../paging/PagingOptions.js";
 import ApiPaginatedOkResponse from "../../paging/ApiPaginatedOkResponse.js";
 
 @ApiTags("cats")
@@ -44,13 +44,12 @@ class CatsController {
 	public async getAllCats(
 		@Query(
 			new ValidationPipe({
-				transform: true, // Transform to instance of PagingOptionsInRequest
+				transform: true, // Transform to instance of PagingOptions
 				whitelist: true, // Do not put other query parameters into the object
 			})
 		)
-		pagingOptionsInRequest: PagingOptionsInRequest
+		pagingOptions: PagingOptions
 	): Promise<Page<CatEntity>> {
-		const pagingOptions = pagingOptionsInRequest.toPagingOptions();
 		return this.catsService.getCats(pagingOptions);
 	}
 	@ApiOkResponse({
