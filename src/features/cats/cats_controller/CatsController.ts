@@ -51,7 +51,6 @@ class CatsController {
 		)
 		pagingOptions: PagingOptions
 	): Promise<Page<Cat>> {
-		console.log(pagingOptions);
 		return this.catsService.getCats(pagingOptions);
 	}
 	@ApiOkResponse({
@@ -105,7 +104,6 @@ class CatsController {
 		)
 		createCatRequestBody: CreateCatRequestBody
 	): Promise<Cat> {
-		console.log(createCatRequestBody);
 		return this.catsService.createCat(payloadifyCreateCatRequestBody(createCatRequestBody));
 	}
 }
