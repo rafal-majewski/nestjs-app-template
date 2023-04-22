@@ -13,7 +13,7 @@ async function paginatedFindAndCount<Entity extends ObjectLiteral>(
 		...pagingOptions,
 	});
 	const page = buildPage({
-		data: entities,
+		items: entities,
 		totalItemsCount: total,
 		skip: pagingOptions.skip,
 		take: pagingOptions.take,

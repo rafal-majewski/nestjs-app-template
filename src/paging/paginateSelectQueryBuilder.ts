@@ -13,7 +13,7 @@ export default async function paginateSelectQueryBuilder<Entity extends ObjectLi
 		.getManyAndCount();
 
 	const page = buildPage({
-		data: entities,
+		items: entities,
 		totalItemsCount: total,
 		skip: pagingOptions.skip,
 		take: pagingOptions.take,

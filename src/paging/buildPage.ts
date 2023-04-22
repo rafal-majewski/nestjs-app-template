@@ -3,26 +3,26 @@ import Page from "./Page.js";
 import PageMeta from "./PageMeta.js";
 
 export default function buildPage<T>({
-	data,
+	items,
 	totalItemsCount,
 	skip,
 	take,
 }: {
-	data: readonly T[];
+	items: readonly T[];
 	totalItemsCount: number;
 	skip: number;
 	take: number;
 }): Page<T> {
 	const pageMeta: Readonly<PageMeta> = {
 		totalItemsCount,
-		pageItemsCount: data.length,
+		pageItemsCount: items.length,
 		skip,
 		take,
 	};
 
 	const page: Page<T> = plainToClass(Page, {
 		meta: pageMeta,
-		data,
+		items,
 	}) as Page<T>;
 
 	return page;
