@@ -1,8 +1,7 @@
-import {plainToClass} from "class-transformer";
 import type {Repository, FindOneOptions, ObjectLiteral} from "typeorm";
 import Page from "./Page.js";
-import PageMeta from "./PageMeta.js";
 import type PagingOptions from "./PagingOptions.js";
+import buildPage from "./buildPage.js";
 
 async function paginatedFindAndCount<Entity extends ObjectLiteral>(
 	repository: Repository<Entity>,
@@ -13,18 +12,12 @@ async function paginatedFindAndCount<Entity extends ObjectLiteral>(
 		...findOneOptions,
 		...pagingOptions,
 	});
-	const pageMeta: PageMeta = {
+	const page = buildPage({
+		data: entities,
 		totalItemsCount: total,
-		pageItemsCount: entities.length,
 		skip: pagingOptions.skip,
 		take: pagingOptions.take,
-	};
-
-	const page = plainToClass(Page, {
-		meta: pageMeta,
-		data: entities,
-	}) as Page<Entity>;
-
+	});
 	return page;
 }
 

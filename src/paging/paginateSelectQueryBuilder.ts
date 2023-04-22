@@ -1,8 +1,7 @@
-import {plainToClass} from "class-transformer";
 import type {SelectQueryBuilder, ObjectLiteral} from "typeorm";
 import Page from "./Page.js";
-import PageMeta from "./PageMeta.js";
 import type PagingOptions from "./PagingOptions.js";
+import buildPage from "./buildPage.js";
 
 export default async function paginateSelectQueryBuilder<Entity extends ObjectLiteral>(
 	selectQueryBuilder: SelectQueryBuilder<Entity>,
@@ -12,17 +11,13 @@ export default async function paginateSelectQueryBuilder<Entity extends ObjectLi
 		.skip(pagingOptions.skip)
 		.take(pagingOptions.take)
 		.getManyAndCount();
-	const pageMeta: Readonly<PageMeta> = {
+
+	const page = buildPage({
+		data: entities,
 		totalItemsCount: total,
-		pageItemsCount: entities.length,
 		skip: pagingOptions.skip,
 		take: pagingOptions.take,
-	};
-
-	const page: Page<Entity> = plainToClass(Page, {
-		meta: pageMeta,
-		data: entities,
-	}) as Page<Entity>;
+	});
 
 	return page;
 }
