@@ -1,7 +1,7 @@
 import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 import {ApiProperty} from "@nestjs/swagger";
 
-class CatInPostRequest {
+class CreateCatRequestBody {
 	@ApiProperty()
 	@IsNotEmpty()
 	@IsString()
@@ -15,4 +15,4 @@ class CatInPostRequest {
 	public readonly breed!: string;
 }
 
-export default CatInPostRequest;
+export default CreateCatRequestBody;

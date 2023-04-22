@@ -22,11 +22,12 @@ import {
 } from "@nestjs/swagger";
 import {EntityNotFoundError} from "typeorm";
 import Cat from "./Cat.js";
-import CatInPostRequest from "./CatInPostRequest.js";
-import CatsService from "./CatsService.js";
-import Page from "../../paging/Page.js";
-import PagingOptions from "../../paging/PagingOptions.js";
-import ApiPaginatedOkResponse from "../../paging/ApiPaginatedOkResponse.js";
+import CreateCatRequestBody from "./CreateCatRequestBody.js";
+import CatsService from "../cats_service/CatsService.js";
+import Page from "../../../paging/Page.js";
+import PagingOptions from "../../../paging/PagingOptions.js";
+import ApiPaginatedOkResponse from "../../../paging/ApiPaginatedOkResponse.js";
+import payloadifyCreateCatRequestBody from "./payloadifyCreateCatRequestBody.js";
 
 @ApiTags("cats")
 @ApiProduces("application/json")
@@ -90,22 +91,22 @@ class CatsController {
 	})
 	@ApiBody({
 		description: "Cat to create",
-		type: CatInPostRequest,
+		type: CreateCatRequestBody,
 	})
 	@ApiConsumes("application/json")
 	@Post("/")
 	public async createCat(
 		@Body(
 			new ValidationPipe({
-				transform: true, // Transform to instance of CatInPostRequest
-				whitelist: true, // Do not allow other properties than those defined in CatInPostRequest
-				forbidNonWhitelisted: true, // Throw an error if other properties than those defined in CatInPostRequest are present
+				transform: true, // Transform to instance of CreateCatRequestBody
+				whitelist: true, // Do not allow other properties than those defined in CreateCatRequestBody
+				forbidNonWhitelisted: true, // Throw an error if other properties than those defined in CreateCatRequestBody are present
 			})
 		)
-		catInPostRequest: CatInPostRequest
+		createCatRequestBody: CreateCatRequestBody
 	): Promise<Cat> {
-		console.log(catInPostRequest);
-		return this.catsService.createCat(catInPostRequest);
+		console.log(createCatRequestBody);
+		return this.catsService.createCat(payloadifyCreateCatRequestBody(createCatRequestBody));
 	}
 }
 
