@@ -75,7 +75,7 @@ describe("HelloModule", () => {
 				});
 				expect(response.statusCode).toBe(200);
 				expect(response.json()).toEqual({
-					data: [],
+					items: [],
 					meta: {skip: 0, take: 10, totalItemsCount: 0, pageItemsCount: 0},
 				});
 			});
@@ -110,7 +110,7 @@ describe("HelloModule", () => {
 				});
 				expect(response.statusCode).toBe(200);
 				expect(response.json()).toEqual({
-					data: [],
+					items: [],
 					meta: {skip: 0, take: 10, totalItemsCount: 0, pageItemsCount: 0},
 				});
 			});
@@ -153,7 +153,7 @@ describe("HelloModule", () => {
 				});
 				expect(response.statusCode).toBe(200);
 				const responseJson = response.json();
-				expect(responseJson).toHaveProperty("data");
+				expect(responseJson).toHaveProperty("items");
 				expect(responseJson).toHaveProperty("meta");
 				expect(responseJson.meta).toEqual({
 					skip: 0,
@@ -161,11 +161,11 @@ describe("HelloModule", () => {
 					totalItemsCount: 1,
 					pageItemsCount: 1,
 				});
-				expect(responseJson.data).toHaveLength(1);
-				expect(responseJson.data[0]).toHaveProperty("id");
-				expect(typeof responseJson.data[0].id).toBe("string");
-				expect(responseJson.data[0].id).not.toHaveLength(0);
-				expect((({id, ...rest}) => rest)(responseJson.data[0])).toEqual(addCatRequestBody);
+				expect(responseJson.items).toHaveLength(1);
+				expect(responseJson.items[0]).toHaveProperty("id");
+				expect(typeof responseJson.items[0].id).toBe("string");
+				expect(responseJson.items[0].id).not.toHaveLength(0);
+				expect((({id, ...rest}) => rest)(responseJson.items[0])).toEqual(addCatRequestBody);
 			});
 		});
 	});

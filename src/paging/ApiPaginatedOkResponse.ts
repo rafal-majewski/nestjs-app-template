@@ -18,7 +18,7 @@ const ApiPaginatedOkResponse = <TModel extends Type<unknown>>({
 					{$ref: getSchemaPath(Page)},
 					{
 						properties: {
-							data: {
+							items: {
 								type: "array",
 								items: {$ref: getSchemaPath(type)},
 							},

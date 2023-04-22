@@ -4,8 +4,8 @@ import CatEntity from "./CatEntity.js";
 import {InjectRepository} from "@nestjs/typeorm";
 import CatInPostRequest from "./CatInPostRequest.js";
 import Page from "../../paging/Page.js";
-import PageMeta from "../../paging/PageMeta.js";
 import PagingOptions from "../../paging/PagingOptions.js";
+import paginatedFindAndCount from "../../paging/paginatedFindAndCount.js";
 
 @Injectable()
 class CatsService {
@@ -14,21 +14,7 @@ class CatsService {
 		this.catsRepository = catsRepository;
 	}
 	public async getCats(pagingOptions: PagingOptions): Promise<Page<CatEntity>> {
-		const [cats, total] = await this.catsRepository.findAndCount({
-			take: pagingOptions.take,
-			skip: pagingOptions.skip,
-		});
-		const pageMeta: PageMeta = {
-			totalItemsCount: total,
-			pageItemsCount: cats.length,
-			skip: pagingOptions.skip,
-			take: pagingOptions.take,
-		};
-		const page: Page<CatEntity> = {
-			meta: pageMeta,
-			data: cats,
-		};
-		return page;
+		return paginatedFindAndCount(this.catsRepository, pagingOptions);
 	}
 	public async getCatById(id: string): Promise<CatEntity> {
 		return this.catsRepository.findOneByOrFail({id});
