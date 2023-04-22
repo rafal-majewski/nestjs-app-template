@@ -12,8 +12,8 @@ import * as Path from "path";
 import * as Fs from "fs/promises";
 import {Test} from "@nestjs/testing";
 import {getRepositoryToken} from "@nestjs/typeorm";
-import CatEntity from "../../src/features/cats/CatEntity.js";
-import CatsModule from "../../src/features/cats/CatsModule.js";
+import CatEntity from "../../src/features/cats/cats_service/CatEntity.js";
+import CatsModule from "../../src/features/cats/cats_module/CatsModule.js";
 import HelloModule from "../../src/features/hello/HelloModule.js";
 
 const appModule = await Test.createTestingModule({
