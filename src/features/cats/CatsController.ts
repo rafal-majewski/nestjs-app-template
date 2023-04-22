@@ -50,6 +50,7 @@ class CatsController {
 		)
 		pagingOptions: PagingOptions
 	): Promise<Page<CatEntity>> {
+		console.log(pagingOptions);
 		return this.catsService.getCats(pagingOptions);
 	}
 	@ApiOkResponse({
@@ -96,12 +97,14 @@ class CatsController {
 	public async createCat(
 		@Body(
 			new ValidationPipe({
+				transform: true, // Transform to instance of CatInPostRequest
 				whitelist: true, // Do not allow other properties than those defined in CatInPostRequest
 				forbidNonWhitelisted: true, // Throw an error if other properties than those defined in CatInPostRequest are present
 			})
 		)
 		catInPostRequest: CatInPostRequest
 	): Promise<CatEntity> {
+		console.log(catInPostRequest);
 		return this.catsService.createCat(catInPostRequest);
 	}
 }
