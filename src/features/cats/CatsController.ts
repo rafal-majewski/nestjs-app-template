@@ -21,7 +21,7 @@ import {
 	ApiTags,
 } from "@nestjs/swagger";
 import {EntityNotFoundError} from "typeorm";
-import CatEntity from "./CatEntity.js";
+import Cat from "./Cat.js";
 import CatInPostRequest from "./CatInPostRequest.js";
 import CatsService from "./CatsService.js";
 import Page from "../../paging/Page.js";
@@ -38,7 +38,7 @@ class CatsController {
 	}
 	@ApiPaginatedOkResponse({
 		description: "All cats",
-		type: CatEntity,
+		type: Cat,
 	})
 	@Get("/")
 	public async getAllCats(
@@ -49,13 +49,13 @@ class CatsController {
 			})
 		)
 		pagingOptions: PagingOptions
-	): Promise<Page<CatEntity>> {
+	): Promise<Page<Cat>> {
 		console.log(pagingOptions);
 		return this.catsService.getCats(pagingOptions);
 	}
 	@ApiOkResponse({
 		description: "Cat with given id",
-		type: CatEntity,
+		type: Cat,
 	})
 	@ApiNotFoundResponse({
 		description: "Cat with given id not found",
@@ -70,7 +70,7 @@ class CatsController {
 			})
 		)
 		id: string
-	): Promise<CatEntity> {
+	): Promise<Cat> {
 		try {
 			const targetCat = await this.catsService.getCatById(id);
 			return targetCat;
@@ -83,7 +83,7 @@ class CatsController {
 	}
 	@ApiCreatedResponse({
 		description: "Cat created",
-		type: CatEntity,
+		type: Cat,
 	})
 	@ApiBadRequestResponse({
 		description: "Invalid cat data",
@@ -103,7 +103,7 @@ class CatsController {
 			})
 		)
 		catInPostRequest: CatInPostRequest
-	): Promise<CatEntity> {
+	): Promise<Cat> {
 		console.log(catInPostRequest);
 		return this.catsService.createCat(catInPostRequest);
 	}
