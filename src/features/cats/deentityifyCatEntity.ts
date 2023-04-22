@@ -8,5 +8,5 @@ export default function deentityifyCatEntity(catEntity: CatEntity): Cat {
 		name: catEntity.name,
 		age: catEntity.age,
 		breed: catEntity.breed,
-	}) as Cat;
+	});
 }
