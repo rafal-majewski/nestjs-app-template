@@ -20,7 +20,6 @@ import {
 	ApiProduces,
 	ApiTags,
 } from "@nestjs/swagger";
-import {EntityNotFoundError} from "typeorm";
 import Cat from "./Cat.js";
 import CreateCatRequestBody from "./CreateCatRequestBody.js";
 import CatsService from "../cats_service/CatsService.js";
@@ -28,6 +27,7 @@ import Page from "../../../paging/Page.js";
 import PagingOptions from "../../../paging/PagingOptions.js";
 import ApiPaginatedOkResponse from "../../../paging/ApiPaginatedOkResponse.js";
 import payloadifyCreateCatRequestBody from "./payloadifyCreateCatRequestBody.js";
+import CatsServiceCatWithGivenIdNotFoundError from "../cats_service/CatsServiceCatWithGivenIdNotFoundError.js";
 
 @ApiTags("cats")
 @ApiProduces("application/json")
@@ -75,7 +75,7 @@ class CatsController {
 			const targetCat = await this.catsService.getCatById(id);
 			return targetCat;
 		} catch (error) {
-			if (error instanceof EntityNotFoundError) {
+			if (error instanceof CatsServiceCatWithGivenIdNotFoundError) {
 				throw new NotFoundException(`Cat with id "${id}" not found`);
 			}
 			throw error;
