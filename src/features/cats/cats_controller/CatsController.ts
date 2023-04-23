@@ -59,22 +59,22 @@ class CatsController {
 	@ApiNotFoundResponse({
 		description: "Cat with given id not found",
 	})
-	@Get("/:id")
+	@Get("/:catId")
 	public async getCatById(
 		@Param(
-			"id",
+			"catId",
 			new ParseUUIDPipe({
 				version: "4",
 			})
 		)
-		id: string
+		catId: string
 	): Promise<Cat> {
 		try {
-			const targetCat = await this.catsService.getCatById(id);
+			const targetCat = await this.catsService.getCatById(catId);
 			return targetCat;
 		} catch (error) {
 			if (error instanceof CatsServiceCatWithGivenIdNotFoundError) {
-				throw new NotFoundException(`Cat with id "${id}" not found`);
+				throw new NotFoundException(`Cat with id "${catId}" not found`);
 			}
 			throw error;
 		}
