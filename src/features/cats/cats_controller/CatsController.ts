@@ -2,7 +2,6 @@ import {
 	Body,
 	Controller,
 	Get,
-	HttpStatus,
 	NotFoundException,
 	Param,
 	ParseUUIDPipe,
@@ -65,7 +64,6 @@ class CatsController {
 		@Param(
 			"id",
 			new ParseUUIDPipe({
-				errorHttpStatusCode: HttpStatus.NOT_FOUND,
 				version: "4",
 			})
 		)
