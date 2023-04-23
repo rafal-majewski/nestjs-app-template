@@ -84,7 +84,7 @@ describe("HelloModule", () => {
 					method: "GET",
 					url: "/v1/cats/1",
 				});
-				expect(response.statusCode).toBe(404);
+				expect(response.statusCode).toBe(400);
 			});
 			test("POST /cats", async () => {
 				const addCatRequestBody = {
@@ -114,10 +114,17 @@ describe("HelloModule", () => {
 					meta: {skip: 0, take: 10, totalItemsCount: 0, pageItemsCount: 0},
 				});
 			});
-			test("GET /cats/:id", async () => {
+			test("GET /cats/:id with invalid UUID4", async () => {
 				const response = await app.inject({
 					method: "GET",
 					url: "/v2/cats/1",
+				});
+				expect(response.statusCode).toBe(400);
+			});
+			test("GET /cats/:id with valid UUID4", async () => {
+				const response = await app.inject({
+					method: "GET",
+					url: "/v2/cats/e8a7b311-367b-4105-a75d-929b930faafa",
 				});
 				expect(response.statusCode).toBe(404);
 			});
