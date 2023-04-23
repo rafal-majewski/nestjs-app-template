@@ -1,5 +1,5 @@
 import {Injectable} from "@nestjs/common";
-import {Repository} from "typeorm";
+import {EntityNotFoundError, Repository} from "typeorm";
 import CatEntity from "./CatEntity.js";
 import {InjectRepository} from "@nestjs/typeorm";
 import Page from "../../../paging/Page.js";
@@ -8,6 +8,7 @@ import paginatedFindAndCount from "../../../paging/paginatedFindAndCount.js";
 import type Cat from "../cats_controller/Cat.js";
 import deentityifyCatEntity from "./deentityifyCatEntity.js";
 import CreateCatPayload from "./CreateCatPayload.js";
+import CatsServiceCatWithGivenIdNotFoundError from "./CatsServiceCatWithGivenIdNotFoundError.js";
 
 @Injectable()
 class CatsService {
@@ -21,7 +22,14 @@ class CatsService {
 		);
 	}
 	public async getCatById(id: string): Promise<Cat> {
-		return deentityifyCatEntity(await this.catsRepository.findOneByOrFail({id}));
+		try {
+			return deentityifyCatEntity(await this.catsRepository.findOneByOrFail({id}));
+		} catch (error) {
+			if (error instanceof EntityNotFoundError) {
+				throw new CatsServiceCatWithGivenIdNotFoundError(id);
+			}
+			throw error;
+		}
 	}
 	public async createCat(createCatPayload: CreateCatPayload): Promise<Cat> {
 		return deentityifyCatEntity(await this.catsRepository.save(createCatPayload));
