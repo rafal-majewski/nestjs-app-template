@@ -22,7 +22,7 @@ import {
 import Cat from "./Cat.js";
 import CreateCatRequestBody from "./CreateCatRequestBody.js";
 import CatsService from "../cats_service/CatsService.js";
-import Page from "../../../paging/Page.js";
+import type Page from "../../../paging/Page.js";
 import PagingOptions from "../../../paging/PagingOptions.js";
 import ApiPaginatedOkResponse from "../../../paging/ApiPaginatedOkResponse.js";
 import payloadifyCreateCatRequestBody from "./payloadifyCreateCatRequestBody.js";
