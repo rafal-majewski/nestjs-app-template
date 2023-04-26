@@ -54,6 +54,7 @@
 		"target": "es2022",
 		"useDefineForClassFields": true,
 		"skipLibCheck": true,
-		"allowUnusedLabels": false
+		"allowUnusedLabels": false,
+		"ignoreDeprecations": "5.0"
 	}
 }
