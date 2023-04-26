@@ -1,5 +1,5 @@
-import Zod from "zod";
-import openApiConfigSchema from "./openApiConfigSchema.js";
+import type Zod from "zod";
+import type openApiConfigSchema from "./openApiConfigSchema.js";
 
 type OpenApiConfig = Readonly<Zod.infer<typeof openApiConfigSchema>>;
 
