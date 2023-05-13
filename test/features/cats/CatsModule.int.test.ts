@@ -12,7 +12,7 @@ import testsConfig from "../../app_config/testsConfig.js";
 import generatePostgresqlPassword from "../../utils/generatePostgresqlPassword.js";
 import createTestingApp from "../../utils/createTestingApp.js";
 
-describe("HelloModule", () => {
+describe("CatsModule", () => {
 	let postgresqlContainer: Testcontainers.StartedPostgreSqlContainer;
 	let app: NestFastifyApplication;
 	let postgresqlInitializationSqlScript: string;
