@@ -25,6 +25,12 @@ The entry point of your application is `src/main.ts`.
 
 ### Run the application in development mode
 
+Setup database:
+
+```
+docker-compose --file docker-compose-dev-env.yaml --env-file=.env up
+```
+
 ```bash
 npm run dev
 ```
