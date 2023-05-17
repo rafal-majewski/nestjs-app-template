@@ -10,7 +10,7 @@ import CatEntity from "../cats_service/CatEntity.js";
 	providers: [CatsService],
 })
 class CatsModule {
-	constructor() {}
+	public constructor() {}
 }
 
 export default CatsModule;

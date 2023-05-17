@@ -8,7 +8,7 @@ import CatsModule from "./cats/cats_module/CatsModule.js";
 	providers: [],
 })
 class FeaturesModule {
-	constructor() {}
+	public constructor() {}
 }
 
 export default FeaturesModule;

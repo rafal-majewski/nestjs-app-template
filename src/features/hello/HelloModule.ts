@@ -9,7 +9,7 @@ import AppConfigModule from "../../app_config/AppConfigModule.js";
 	providers: [HelloService],
 })
 class HelloModule {
-	constructor() {}
+	public constructor() {}
 }
 
 export default HelloModule;
