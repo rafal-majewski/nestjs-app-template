@@ -33,7 +33,7 @@ import CatsServiceCatWithGivenIdNotFoundError from "../cats_service/CatsServiceC
 @Controller("/cats")
 class CatsController {
 	private readonly catsService: CatsService;
-	constructor(catsService: CatsService) {
+	public constructor(catsService: CatsService) {
 		this.catsService = catsService;
 	}
 	@ApiPaginatedOkResponse({

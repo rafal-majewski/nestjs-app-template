@@ -4,7 +4,7 @@ import AppConfig from "../../app_config/AppConfig.js";
 @Injectable()
 class HelloService {
 	private readonly appConfig: AppConfig;
-	constructor(appConfig: AppConfig) {
+	public constructor(appConfig: AppConfig) {
 		this.appConfig = appConfig;
 	}
 	public getHello(): string {

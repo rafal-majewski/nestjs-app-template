@@ -8,7 +8,7 @@ import HelloService from "./HelloService.js";
 class HelloController {
 	private readonly helloService: HelloService;
 
-	constructor(helloService: HelloService) {
+	public constructor(helloService: HelloService) {
 		this.helloService = helloService;
 	}
 	@ApiOkResponse({
