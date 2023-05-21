@@ -13,7 +13,7 @@ import CatsServiceCatWithGivenIdNotFoundError from "./CatsServiceCatWithGivenIdN
 @Injectable()
 class CatsService {
 	private readonly catsRepository: Repository<CatEntity>;
-	constructor(@InjectRepository(CatEntity) catsRepository: Repository<CatEntity>) {
+	public constructor(@InjectRepository(CatEntity) catsRepository: Repository<CatEntity>) {
 		this.catsRepository = catsRepository;
 	}
 	public async getCats(pagingOptions: PagingOptions): Promise<Page<Cat>> {
