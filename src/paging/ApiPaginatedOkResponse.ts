@@ -26,7 +26,7 @@ const ApiPaginatedOkResponse = <TModel extends Type<unknown>>({
 					},
 				],
 			},
-		})
+		}),
 	);
 };
 

@@ -3,7 +3,7 @@ import CreateCatPayload from "../cats_service/CreateCatPayload.js";
 import {plainToClass} from "class-transformer";
 
 export default function payloadifyCreateCatRequestBody(
-	createCatRequestBody: CreateCatRequestBody
+	createCatRequestBody: CreateCatRequestBody,
 ): CreateCatPayload {
 	return plainToClass(CreateCatPayload, createCatRequestBody);
 }

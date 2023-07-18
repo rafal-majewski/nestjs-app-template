@@ -5,7 +5,7 @@ import buildPage from "./buildPage.js";
 
 export default async function paginateSelectQueryBuilder<Entity extends ObjectLiteral>(
 	selectQueryBuilder: SelectQueryBuilder<Entity>,
-	pagingOptions: PagingOptions
+	pagingOptions: PagingOptions,
 ): Promise<Page<Entity>> {
 	const [entities, total]: [readonly Entity[], number] = await selectQueryBuilder
 		.skip(pagingOptions.skip)

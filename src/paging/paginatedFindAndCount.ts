@@ -6,7 +6,7 @@ import buildPage from "./buildPage.js";
 async function paginatedFindAndCount<Entity extends ObjectLiteral>(
 	repository: Repository<Entity>,
 	pagingOptions: PagingOptions,
-	findOneOptions: FindOneOptions<Entity> = {}
+	findOneOptions: FindOneOptions<Entity> = {},
 ): Promise<Page<Entity>> {
 	const [entities, total]: [readonly Entity[], number] = await repository.findAndCount({
 		...findOneOptions,
