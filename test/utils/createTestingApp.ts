@@ -3,10 +3,10 @@ import {FastifyAdapter, type NestFastifyApplication} from "@nestjs/platform-fast
 import initializeApp from "../../src/initializeApp.js";
 
 export default async function createTestingApp(
-	appTestingModule: TestingModule
+	appTestingModule: TestingModule,
 ): Promise<NestFastifyApplication> {
 	const testingApp = appTestingModule.createNestApplication<NestFastifyApplication>(
-		new FastifyAdapter()
+		new FastifyAdapter(),
 	);
 	initializeApp(testingApp);
 	await testingApp.init();

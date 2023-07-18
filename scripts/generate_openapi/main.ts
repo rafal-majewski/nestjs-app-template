@@ -4,7 +4,7 @@ import openApiConfigSchema from "./openApiConfigSchema.js";
 const openApiConfig = await openApiConfigSchema.parse(
 	(
 		await import("../../openapi.config.js")
-	).default
+	).default,
 );
 
 import {SwaggerModule, DocumentBuilder} from "@nestjs/swagger";

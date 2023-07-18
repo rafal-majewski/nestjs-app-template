@@ -20,7 +20,7 @@ describe("CatsModule", () => {
 	beforeAll(async () => {
 		postgresqlInitializationSqlScript = await Fs.readFile(
 			testsConfig.TESTS_POSTGRESQL_INITIALIZATION_SQL_SCRIPT_PATH,
-			"utf-8"
+			"utf-8",
 		);
 	});
 
@@ -28,7 +28,7 @@ describe("CatsModule", () => {
 		const postgresqlContainerPassword = generatePostgresqlPassword();
 
 		postgresqlContainer = await new Testcontainers.PostgreSqlContainer(
-			testsConfig.TESTS_POSTGRESQL_CONTAINER_IMAGE_NAME
+			testsConfig.TESTS_POSTGRESQL_CONTAINER_IMAGE_NAME,
 		)
 			.withPassword(postgresqlContainerPassword)
 			.withEnvironment({"PGPASSWORD": postgresqlContainerPassword})

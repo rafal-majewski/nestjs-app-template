@@ -46,9 +46,9 @@ class CatsController {
 			new ValidationPipe({
 				transform: true, // Transform to instance of PagingOptions
 				whitelist: true, // Do not put other query parameters into the object
-			})
+			}),
 		)
-		pagingOptions: PagingOptions
+		pagingOptions: PagingOptions,
 	): Promise<Page<Cat>> {
 		return this.catsService.getCats(pagingOptions);
 	}
@@ -65,9 +65,9 @@ class CatsController {
 			"catId",
 			new ParseUUIDPipe({
 				version: "4",
-			})
+			}),
 		)
-		catId: string
+		catId: string,
 	): Promise<Cat> {
 		try {
 			const targetCat = await this.catsService.getCatById(catId);
@@ -98,9 +98,9 @@ class CatsController {
 				transform: true, // Transform to instance of CreateCatRequestBody
 				whitelist: true, // Do not allow other properties than those defined in CreateCatRequestBody
 				forbidNonWhitelisted: true, // Throw an error if other properties than those defined in CreateCatRequestBody are present
-			})
+			}),
 		)
-		createCatRequestBody: CreateCatRequestBody
+		createCatRequestBody: CreateCatRequestBody,
 	): Promise<Cat> {
 		return this.catsService.createCat(payloadifyCreateCatRequestBody(createCatRequestBody));
 	}

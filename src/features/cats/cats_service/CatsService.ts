@@ -18,7 +18,7 @@ class CatsService {
 	}
 	public async getCats(pagingOptions: PagingOptions): Promise<Page<Cat>> {
 		return (await paginatedFindAndCount(this.catsRepository, pagingOptions)).map(
-			deentityifyCatEntity
+			deentityifyCatEntity,
 		);
 	}
 	public async getCatById(id: string): Promise<Cat> {
